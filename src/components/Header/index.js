@@ -6,7 +6,7 @@ const HeaderBar = () => {
     return (
         <>
         <Container>
-        <Navbar>
+        <Navbar >
               <Navbar.Brand href="/">
                   <img
                       src={logo_test}
