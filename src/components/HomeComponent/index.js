@@ -1,6 +1,10 @@
+import HeaderBar from "../Header";
+
 const HomeScreen = () => {
-    return (
-        <p>Home</p>
-      );
+  return (
+    <>
+      <HeaderBar />
+    </>
+  );
 }
 export default HomeScreen;
