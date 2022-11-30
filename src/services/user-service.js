@@ -7,3 +7,8 @@ export const findUser = async () => {
     const response = await axios.get(USER_API);
     return response.data;
 }
+
+export const register = async (user) => {
+    const response = await axios.post(`${API_BASE}/register`, user);
+    return response.data;
+}
