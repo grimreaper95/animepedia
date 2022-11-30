@@ -22,7 +22,7 @@ const RandomAnimeList = () => {
             <Row>
                 {animeList.filter((anime, a) => a < 8).map((anime, a) => (
                     <Col key={a} xs={12} md={4} lg={3}>
-                        <Card >
+                        <Card className="shadow p-0 mb-5 bg-white rounded">
                             <Card.Img src={anime.images.jpg.image_url} />
 
                             <Card.Body>
