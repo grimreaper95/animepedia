@@ -1,25 +1,21 @@
 import React from "react";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {registerThunk} from "../../services/user-thunk";
+import {loginThunk} from "../../services/user-thunk";
+import userReducer from "../../reducers/user-reducer";
 import {useNavigate} from "react-router";
 
-const Register = () => {
+const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState(null)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {currentUser} = useSelector(state => state.userData)
-    const handleRegistrationBtn = () => {
-        if (password !== confirmPassword) {
-            setError('Passwords must match!')
-            return
-        }
+    const handleLoginBtn = () => {
         setError(null)
-        const newUser = {username, password}
-        dispatch(registerThunk(newUser))
+        const loginUser = {username, password}
+        dispatch(loginThunk(loginUser))
         console.log(currentUser)
         if (currentUser) {
             console.log(`Welcome ${currentUser.firstName}!`)
@@ -28,7 +24,7 @@ const Register = () => {
     }
     return (
         <>
-            <h1>Register</h1>
+            <h1>Login</h1>
             {
                 error &&
                 <div className="alert alert-danger">
@@ -48,17 +44,11 @@ const Register = () => {
                 placeholder="Password"
                 onChange={(e) =>setPassword(e.target.value)}/>
 
-            <input
-                className="form-control mb-2"
-                value={confirmPassword}
-                type="password"
-                placeholder="Confirm Password"
-                onChange={(e) =>setConfirmPassword(e.target.value)}/>
-            <button onClick={handleRegistrationBtn} className="btn btn-primary w-100">
-                Register
+            <button onClick={handleLoginBtn} className="btn btn-primary w-100">
+                Login
             </button>
         </>
     )
 }
 
-export default Register;
+export default Login;
