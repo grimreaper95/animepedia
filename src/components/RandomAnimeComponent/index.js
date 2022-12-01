@@ -26,7 +26,7 @@ const RandomAnimeList = () => {
                             <Card.Img src={anime.images.jpg.image_url} />
 
                             <Card.Body>
-                                <a href = './detail'>
+                                <a href={'http://localhost:3000/detail/' + anime.mal_id}>
                                     <Card.Title>{anime.title}</Card.Title>
                                 </a>
 

@@ -4,6 +4,7 @@ import {Provider} from "react-redux";
 import ProfileItem from "./components/ProfileComponent/profile-item";
 import Register from "./components/register"
 import HomeScreen from "./components/HomeComponent/index";
+import AnimeDetailScreen from "./components/AnimeDetail/index"
 import userReducer from "./reducers/user-reducer";
 
 import { configureStore }
@@ -22,6 +23,7 @@ function App() {
                         <Route index element={<HomeScreen />} />
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/profile" element={<ProfileItem/>}/>
+                        <Route path="detail/:id" element={<AnimeDetailScreen />} />
                     </Routes>
                 </div>
             </BrowserRouter>
