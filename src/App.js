@@ -2,10 +2,10 @@ import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
 import {Provider} from "react-redux";
 import ProfileItem from "./components/ProfileComponent/profile-item";
+import Login from "./components/login"
 import Register from "./components/register"
 import HomeScreen from "./components/HomeComponent/index";
 import userReducer from "./reducers/user-reducer";
-
 import { configureStore }
     from '@reduxjs/toolkit';
 
@@ -20,6 +20,7 @@ function App() {
                 <div className="container">
                     <Routes>
                         <Route index element={<HomeScreen />} />
+                        <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/profile" element={<ProfileItem/>}/>
                     </Routes>

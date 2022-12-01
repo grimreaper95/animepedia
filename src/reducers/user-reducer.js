@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {registerThunk} from "../services/user-thunk";
-
+import {loginThunk, registerThunk} from "../services/user-thunk";
 const userSlice = createSlice ({
     name: 'users',
     initialState: {
@@ -12,10 +11,17 @@ const userSlice = createSlice ({
     },
     extraReducers: {
         [registerThunk.fulfilled]: (state, action) => {
-            state.currentUser = action.payload
+            state.currentUser = action.payload;
         },
-        [registerThunk.fulfilled]: (state, action) => {
-            state.error = action.payload
+        [loginThunk.fulfilled]: (state, action) => {
+            state.currentUser = action.payload;
+        },
+        [registerThunk.rejected]: (state, action) => {
+            state.error = action.payload;
+        },
+        [loginThunk.rejected]: (state, action) => {
+            state.error = action.payload;
+            alert('Invalid username or password. Try again!');
         }
     }
 });
