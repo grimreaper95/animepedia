@@ -15,5 +15,11 @@ export const register = async (user) => {
 
 export const login = async (user) => {
     const response = await axios.post(`${API_BASE}/login `, user);
+    console.log(response.data)
+    return response.data;
+}
+
+export const profile = async (user) => {
+    const response = await axios.get(`${API_BASE}/profile `);
     return response.data;
 }

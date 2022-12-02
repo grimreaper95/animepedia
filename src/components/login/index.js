@@ -1,8 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "../../services/user-thunk";
-import userReducer from "../../reducers/user-reducer";
 import {useNavigate} from "react-router";
 
 const Login = () => {
@@ -12,15 +11,27 @@ const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {currentUser} = useSelector(state => state.userData)
+
+    useEffect(() => {
+        // redirect user to login page if registration was successful
+        if (currentUser) navigate('/')
+        console.log(currentUser)
+    }, [navigate, currentUser])
+
     const handleLoginBtn = () => {
         setError(null)
         const loginUser = {username, password}
-        dispatch(loginThunk(loginUser))
-        console.log(currentUser)
-        if (currentUser) {
-            console.log(`Welcome ${currentUser.firstName}!`)
-            navigate('/')
-        }
+        dispatch(loginThunk(loginUser)).then(
+            () => {
+                console.log(currentUser)
+                if (currentUser) {
+                    navigate('/')
+                }
+            }
+
+        )
+
+
     }
     return (
         <>
