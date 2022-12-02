@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "../../services/user-thunk";
 import {useNavigate} from "react-router";
+import {Link} from "react-router-dom";
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -30,12 +31,15 @@ const Login = () => {
             }
 
         )
+    }
 
+    const goToProfile = () => {
 
     }
     return (
         <>
             <h1>Login</h1>
+
             {
                 error &&
                 <div className="alert alert-danger">
@@ -58,6 +62,8 @@ const Login = () => {
             <button onClick={handleLoginBtn} className="btn btn-primary w-100">
                 Login
             </button>
+
+
         </>
     )
 }

@@ -24,6 +24,7 @@ function App() {
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/profile" element={<ProfileItem/>}/>
+
                         <Route path="detail/:id" element={<AnimeDetailScreen />} />
                     </Routes>
                 </div>
