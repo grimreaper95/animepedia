@@ -2,18 +2,17 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {profileThunk} from "../../services/user-thunk";
 import "./index.css"
+import {useNavigate} from "react-router";
 
 const ProfileItem = () => {
 
     const {currentUser} = useSelector(state => state.userData)
-
-    console.log("profile", currentUser);
-
-
     const [editProfile, setEditProfile] = useState(false);
+    const navigate = useNavigate();
 
     const editClickHandler = () => {
         setEditProfile(true);
+        navigate("/edit-profile");
 
     }
 
@@ -27,12 +26,18 @@ const ProfileItem = () => {
                 </div>
             </div>
             <div className="p-2 name">
-                <span>
-                 <h1 className=" text-secondary">@ {currentUser.username}  </h1>
-                     <button className="btn btn-primary rounded-pill float-end" onClick={editClickHandler}>
+                <div className="row">
+                    <div className="col-8">
+                        <h1 className=" text-secondary">@ {currentUser.username}  </h1>
+                    </div>
+                    <div className="col-4">
+                        <button className="btn btn-primary rounded-pill float-end" onClick={editClickHandler}>
                             Edit Profile
                         </button>
-                </span>
+                    </div>
+
+
+                </div>
 
 
                 <div className="m-3 text-secondary">

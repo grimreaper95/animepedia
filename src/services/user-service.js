@@ -25,6 +25,11 @@ export const profile = async (user) => {
     return null;
 }
 
+export const updateProfile = async (user) =>{
+    const response = await axios.put(`${API_BASE}/profile/${user._id}`, user)
+    return user;
+}
+
 // export const getLoggedInUserDetails = () => {
 //     try {
 //         const userDetails = localStorage.getItem("user");

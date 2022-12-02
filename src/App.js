@@ -7,8 +7,9 @@ import Register from "./components/register"
 import HomeScreen from "./components/HomeComponent/index";
 import AnimeDetailScreen from "./components/AnimeDetail/index"
 import userReducer from "./reducers/user-reducer";
-import { configureStore }
+import {configureStore}
     from '@reduxjs/toolkit';
+import EditProfile from "./components/EditProfile";
 
 const store = configureStore(
     {reducer: {userData: userReducer}});
@@ -20,12 +21,12 @@ function App() {
             <BrowserRouter>
                 <div className="container">
                     <Routes>
-                        <Route index element={<HomeScreen />} />
+                        <Route index element={<HomeScreen/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/profile" element={<ProfileItem/>}/>
-
-                        <Route path="detail/:id" element={<AnimeDetailScreen />} />
+                        <Route path="detail/:id" element={<AnimeDetailScreen/>}/>
+                        <Route path="edit-profile" element={<EditProfile/>}/>
                     </Routes>
                 </div>
             </BrowserRouter>
