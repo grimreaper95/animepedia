@@ -10,6 +10,7 @@ const EditProfile = (editProfile) => {
     const [firstName, setFirstName] = useState(currentUser.firstName);
     const [lastName, setLastName] = useState(currentUser.lastName);
     const [email, setEmail] = useState(currentUser.email);
+    const [phoneNumber, setPhoneNumber] = useState(currentUser.phoneNumber);
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -21,7 +22,7 @@ const EditProfile = (editProfile) => {
     }
 
     const saveClickHandler = () => {
-        const updatedProfile = {...currentUser, firstName, lastName, email}
+        const updatedProfile = {...currentUser, firstName, lastName, email, phoneNumber}
         dispatch(updateProfileThunk(updatedProfile))
         navigate("/profile")
 
@@ -77,6 +78,21 @@ const EditProfile = (editProfile) => {
                         className="form-control" id="floatingInputGrid"
                         value={email}></input>
                     <label htmlFor="floatingInputGrid">Email Id</label>
+                </div>
+
+            </div>
+
+            <div className=" mt-2">
+                <div className="form-floating">
+                    <input
+                        onChange={(event) => {
+                            console.log("loc ", event.target.value)
+                            setPhoneNumber(event.target.value)
+                        }
+                        }
+                        className="form-control" id="floatingInputGrid"
+                        value={phoneNumber}></input>
+                    <label htmlFor="floatingInputGrid">Phone Number</label>
                 </div>
 
             </div>

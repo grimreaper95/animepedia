@@ -43,6 +43,7 @@ const ProfileItem = () => {
                 <div className="m-3 text-secondary">
                     <h3> Name : {currentUser.firstName} {currentUser.lastName}</h3>
                     <h3> Email Id : {currentUser.email} </h3>
+                    <h3> Phone Number : {currentUser.phoneNumber} </h3>
                     <h3> Account Type : {currentUser.accountType} </h3>
                 </div>
 
