@@ -31,6 +31,9 @@ const EditProfile = (editProfile) => {
         <>
 
             <div className="position-relative ">
+                <i
+                    onClick={cancelClickHandler}
+                    className="col-11 fa-solid fa-xmark fa-2x"></i>
                 <img src={require('../../images/profile_banner.png')} className=" img w-100 "/><br/>
                 <div className="col-3 position-absolute top-50 ms-2">
                     <img className="rounded-circle img-fluid img-thumbnail" src={require('../../images/profile.jpg')}
@@ -38,16 +41,16 @@ const EditProfile = (editProfile) => {
                 </div>
             </div>
 
-            <div className="row">
-                <i
-                    onClick={cancelClickHandler}
-                    className="col-1 fa-solid fa-xmark fa-2x"></i>
-                <h1 className="col-8">Edit Profile</h1>
+            <div>
                 <button
                     onClick={saveClickHandler}
-                    className=" my-1 me-0  btn btn-primary col-2 float-end rounded-pill"> Save
+                    className=" my-1 me-0  btn btn-primary col-1 float-end rounded-pill"> Save
                 </button>
+
             </div>
+
+            <br/>
+
 
             <div className="mt-5 pt-5">
                 <div className="form-floating ">
