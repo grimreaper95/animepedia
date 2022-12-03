@@ -1,0 +1,24 @@
+.title {
+    color: #860111;
+    font-size: larger;
+    font-weight: bold;
+}
+.video-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+  }
+  
+  .video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    max-height: 319px;
+  }
+
+  .max-height-img {
+    height: 319px;
+  }
