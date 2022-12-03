@@ -2,7 +2,7 @@ import React from "react";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "../../services/user-thunk";
-import {useNavigate} from "react-router";
+import {Navigate, useNavigate} from "react-router";
 
 const Register = () => {
     const [username, setUsername] = useState('')
@@ -12,6 +12,9 @@ const Register = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {currentUser} = useSelector(state => state.userData)
+    if (currentUser) {
+        return (<Navigate to={'/profile'}/>)
+    }
     const handleRegistrationBtn = () => {
         if (password !== confirmPassword) {
             setError('Passwords must match!')
