@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {loginThunk, registerThunk, profileThunk, updateProfileThunk} from "../services/user-thunk";
+import {loginThunk, registerThunk, profileThunk, logoutThunk, updateProfileThunk} from "../services/user-thunk";
 import {findUser} from "../services/user-service";
 
 const userSlice = createSlice({
@@ -22,10 +22,16 @@ const userSlice = createSlice({
             state.currentUser = action.payload;
             state.currentUser = {...state.currentUser, currentUser: action.payload}
         },
+        [logoutThunk.fulfilled]: (state, action) => {
+            state.currentUser = null
+        },
         [profileThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload;
+            console.log('oops')
+            console.log(state.currentUser)
         },
         [registerThunk.rejected]: (state, action) => {
+            console.log('whoops')
             state.error = action.payload;
         },
         [loginThunk.rejected]: (state, action) => {
@@ -34,7 +40,8 @@ const userSlice = createSlice({
             alert('Invalid username or password.  Try again!');
         },
         [profileThunk.rejected]: (state, action) => {
-            state.currentUser = action.payload;
+            state.error = action.payload;
+            state.currentUser = null;
         },
         [updateProfileThunk.fulfilled]: (state, action) => {
             // const userIndex = state.currentUser.findIndex(u => u._id === payload._id)
@@ -50,6 +57,4 @@ const userSlice = createSlice({
     }
 });
 
-
-export const {logoutUser} = userSlice.actions;
 export default userSlice.reducer;

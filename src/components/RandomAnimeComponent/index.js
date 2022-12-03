@@ -30,7 +30,7 @@ const RandomAnimeList = () => {
                                     <Card.Title>{anime.title}</Card.Title>
                                 </a>
 
-                                <Card.Text><p>{anime.synopsis.substring(0, 100)} {anime.synopsis.length >= 200 && '...'}</p></Card.Text>
+                                <Card.Text>{anime.synopsis.substring(0, 100)} {anime.synopsis.length >= 200 && '...'}</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>

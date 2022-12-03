@@ -3,15 +3,19 @@ import logo_test from "../../images/logo_test.png"
 import './index.css'
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {logoutUser} from "../../reducers/user-reducer";
+import {profileThunk, logoutThunk} from "../../services/user-thunk";
+import {useEffect} from "react";
 
 const HeaderBar = () => {
     const {currentUser} = useSelector(state => state.userData)
     const dispatch = useDispatch()
     const handleLogout = () => {
         console.log('logging out');
-        dispatch(logoutUser())
+        dispatch(logoutThunk())
     }
+    useEffect(()=>{
+        dispatch(profileThunk())
+    }, [])
     return (
         <>
         <Container>
