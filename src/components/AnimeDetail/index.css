@@ -13,12 +13,15 @@
   .video-responsive iframe {
     left: 0;
     top: 0;
-    height: 100%;
     width: 100%;
     position: absolute;
-    max-height: 319px;
+    height: 320px;
   }
 
-  .max-height-img {
-    height: 319px;
+  .photo-section {
+    height: 320px;
+  }
+
+  .badge {
+    font-size: 1em;
   }
