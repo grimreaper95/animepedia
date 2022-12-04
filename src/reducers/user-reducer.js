@@ -1,12 +1,20 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {loginThunk, registerThunk, profileThunk, logoutThunk, updateProfileThunk} from "../services/user-thunk";
+import {
+    loginThunk,
+    registerThunk,
+    profileThunk,
+    logoutThunk,
+    updateProfileThunk,
+    findUserThunk
+} from "../services/user-thunk";
 import {findUser} from "../services/user-service";
 
 const userSlice = createSlice({
     name: 'users',
     initialState: {
         currentUser: null,
-        error: null
+        error: null,
+        user: null
     },
     reducers: {
         logoutUser(state) {
@@ -51,6 +59,10 @@ const userSlice = createSlice({
             // }
             state.currentUser = action.payload
 
+        },
+        [findUserThunk.fulfilled]: (state, action) => {
+            console.log("thunk " + action.payload)
+            state.user = action.payload.user;
         }
     }
 });

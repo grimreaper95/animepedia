@@ -14,12 +14,16 @@ import CurrentUser from "./components/CurrentUser";
 import AnimeSearch from "./components/AnimeSearch";
 import animeSearchReducer from "./reducers/anime-search-reducer";
 import OtherUserProfile from "./components/OtherUserProfile";
+import Following from "./components/Following";
+import followingReducer from "./reducers/following-reducer";
 
 const store = configureStore({
-                reducer: {
-                    userData: userReducer,
-                    animeSearch:animeSearchReducer
-                }, });
+    reducer: {
+        userData: userReducer,
+        animeSearch: animeSearchReducer,
+        following: followingReducer
+    },
+});
 
 
 function App() {
@@ -36,6 +40,7 @@ function App() {
                         <Route path="detail/:id" element={<AnimeDetailScreen/>}/>
                         <Route path="edit-profile" element={<EditProfile/>}/>
                         <Route path="/profile/:usid" element={<OtherUserProfile/>}/>
+                        <Route path="/follow/:usid" element={<Following/>}/>
                     </Routes>
                 </div>
             </BrowserRouter>

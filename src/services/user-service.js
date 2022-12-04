@@ -2,10 +2,10 @@ import axios from 'axios';
 const api = axios.create({withCredentials: true});
 
 const API_BASE = 'http://localhost:4000';
-const USER_API = `${API_BASE}/profile`;
 
-export const findUser = async () => {
-    const response = await api.get(USER_API);
+export const findUser = async (userId) => {
+    const response = await api.get(`${API_BASE}/profile/${userId}`,userId);
+    console.log("data" + response.data)
     return response.data;
 }
 

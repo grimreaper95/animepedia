@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {profileThunk} from "../../services/user-thunk";
 import "./index.css"
 import {useNavigate} from "react-router";
+import Following from "../Following";
 
 const ProfileItem = () => {
 
@@ -48,6 +49,7 @@ const ProfileItem = () => {
                 </div>
 
             </div>
+            <Following/>
 
 
         </>
