@@ -4,6 +4,7 @@ import {findUserThunk} from "../../services/user-thunk";
 import {findUser} from "../../services/user-service";
 import {useState} from "react";
 import {useNavigate} from "react-router";
+import otherUserProfile from "../OtherUserProfile";
 
 const FollowItemList = ({follow}) => {
 
@@ -30,7 +31,12 @@ const FollowItemList = ({follow}) => {
                 <li
                     className="list-group-item"
                 >
-                    <h1 >  {user.firstName} {user.lastName} </h1>
+                    <h1 onClick={() => {
+                        let path = `/profile/${user._id}`;
+                        navigate(path);
+                        // navigate("/profile/:user.id");
+                     }
+                    }>  {user.firstName} {user.lastName} </h1>
                 </li> : null
         }
 
