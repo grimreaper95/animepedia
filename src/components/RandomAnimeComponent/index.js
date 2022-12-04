@@ -17,25 +17,27 @@ const RandomAnimeList = () => {
     }, [])
 
 
-    return(
+    return (
         <>
-            <Row>
-                {animeList.filter((anime, a) => a < 8).map((anime, a) => (
-                    <Col key={a} xs={12} md={4} lg={3}>
-                        <Card className="shadow p-0 mb-5 bg-white rounded">
-                            <Card.Img src={anime.images.jpg.image_url} />
+            <Container>
+                <Row>
+                    {animeList.filter((anime, a) => a < 8).map((anime, a) => (
+                        <Col key={a} xs={12} md={4} lg={3}>
+                            <Card className="shadow p-0 mb-5 bg-white rounded">
+                                <Card.Img src={anime.images.jpg.image_url} />
 
-                            <Card.Body>
-                                <a href={'http://localhost:3000/detail/' + anime.mal_id}>
-                                    <Card.Title>{anime.title}</Card.Title>
-                                </a>
+                                <Card.Body>
+                                    <a href={'http://localhost:3000/detail/' + anime.mal_id}>
+                                        <Card.Title>{anime.title}</Card.Title>
+                                    </a>
 
-                                <Card.Text>{anime.synopsis.substring(0, 100)} {anime.synopsis.length >= 200 && '...'}</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
-            </Row>
+                                    <Card.Text>{anime.synopsis.substring(0, 100)} {anime.synopsis.length >= 200 && '...'}</Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+                </Row>
+            </Container>
         </>
     )
 }

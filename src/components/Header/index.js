@@ -18,8 +18,8 @@ const HeaderBar = () => {
     }, [])
     return (
         <>
-        <Container>
-        <Navbar>
+        <Navbar className="shadow-lg mb-5 bg-body rounded">
+            <Container>
             <Nav className="me-auto">
                 <Navbar.Brand href="/">
                   <img
@@ -50,8 +50,8 @@ const HeaderBar = () => {
                 }
 
             </Nav>
+            </Container>
           </Navbar>
-        </Container>
         </>
     );
 }

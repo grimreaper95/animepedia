@@ -30,7 +30,7 @@ function App() {
     return (
         <Provider store={store}>
             <BrowserRouter>
-                <div className="container">
+                <div>
                     <Routes>
                         <Route index element={<HomeScreen/>}/>
                         <Route path="/search" element={<AnimeSearch/>}/>

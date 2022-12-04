@@ -29,8 +29,11 @@ const AnimeDetail = () => {
 
     return (
         <>
+
             <HeaderBar />
             <Container>
+
+
                 <Row>
                     <Col>
                         <span className="title">
@@ -59,18 +62,17 @@ const AnimeDetail = () => {
                         />
                     </Col>
                 </Row>
-            
-                <div class="card mt-3">
+
+                <div class="card mt-3 shadow-lg p-3 mb-5 bg-body rounded">
                     <div class="card-body">
-                    {animeGenre.map((genre, a) => (
-                            <span type="button" class="badge rounded-pill bg-dark m-2 card-title">{genre.name}</span>
+                        {animeGenre.map((genre, a) => (
+                            <span class="card-link badge rounded-pill bg-dark card-title">{genre.name}</span>
                         ))}
                         <p class="card-text">{animeInfo.synopsis}</p>
                         {animeStreaming.map((stream, a) => (
-                            <a href={stream.url} class="card-link"><img width="20" height="20" src={"../../images/" + stream.name +".png"} /></a>
-                    
+                            <a href={stream.url} class="card-link"><img width="30" height="30" src={"../../images/" + stream.name + ".png"} /></a>
+
                         ))}
-                        <a href="#" class="card-link">Another link</a>
                     </div>
                 </div>
             </Container>
