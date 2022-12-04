@@ -30,19 +30,21 @@ function App() {
     return (
         <Provider store={store}>
             <BrowserRouter>
-                <div>
-                    <Routes>
-                        <Route index element={<HomeScreen/>}/>
-                        <Route path="/search" element={<AnimeSearch/>}/>
-                        <Route path="/login" element={<Login/>}/>
-                        <Route path="/register" element={<Register/>}/>
-                        <Route path="/profile" element={<ProfileItem/>}/>
-                        <Route path="detail/:id" element={<AnimeDetailScreen/>}/>
-                        <Route path="edit-profile" element={<EditProfile/>}/>
-                        <Route path="/profile/:usid" element={<OtherUserProfile/>}/>
-                        <Route path="/follow/:usid" element={<Following/>}/>
-                    </Routes>
-                </div>
+                <CurrentUser>
+                    <div>
+                        <Routes>
+                            <Route index element={<HomeScreen/>}/>
+                            <Route path="/search" element={<AnimeSearch/>}/>
+                            <Route path="/login" element={<Login/>}/>
+                            <Route path="/register" element={<Register/>}/>
+                            <Route path="/profile" element={<ProfileItem/>}/>
+                            <Route path="detail/:id" element={<AnimeDetailScreen/>}/>
+                            <Route path="edit-profile" element={<EditProfile/>}/>
+                            <Route path="/profile/:usid" element={<OtherUserProfile/>}/>
+                            <Route path="/follow/:usid" element={<Following/>}/>
+                        </Routes>
+                    </div>
+                </CurrentUser>
             </BrowserRouter>
         </Provider>
 
