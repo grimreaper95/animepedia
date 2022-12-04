@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import "./index.css"
 import HeaderBar from "../Header";
+import NavigationSidebar from "../NavigationSidebar";
+
 const AnimeDetail = () => {
     const params = useParams();
     const [animeInfo, setAnimeDetail] = useState([]);
@@ -32,47 +34,53 @@ const AnimeDetail = () => {
 
             <HeaderBar />
             <Container>
+                <div className="row mt-2">
+                    <div className="col-2">
+                        <NavigationSidebar active="explore" />
+                    </div>
 
+                    <div className="col-10">
+                        <Row>
+                            <Col>
+                                <span className="title">
+                                    {animeInfo.title}
+                                </span> <br />
+                                <span className="fw-bold">
+                                    {animeInfo.title_japanese}
+                                </span> <br />
+                                <span>
+                                    {animeInfo.type} . {animeInfo.duration} . Episodes {animeInfo.episodes}
+                                </span>
+                            </Col>
+                        </Row>
 
-                <Row>
-                    <Col>
-                        <span className="title">
-                            {animeInfo.title}
-                        </span> <br />
-                        <span className="fw-bold">
-                            {animeInfo.title_japanese}
-                        </span> <br />
-                        <span>
-                            {animeInfo.type} . {animeInfo.duration} . Episodes {animeInfo.episodes}
-                        </span>
-                    </Col>
-                </Row>
+                        <Row className="mt-3 photo-section">
+                            <Col>
+                                <img height="320" src={animeImage.image_url} />
+                            </Col>
+                            <Col className="video-responsive">
+                                <iframe
+                                    src={animeTrailer.embed_url}
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                    title="Embedded youtube"
+                                />
+                            </Col>
+                        </Row>
 
-                <Row className="mt-3 photo-section">
-                    <Col xs={6} md={4} lg={3} >
-                        <img height="320" src={animeImage.image_url} />
-                    </Col>
-                    <Col className="video-responsive">
-                        <iframe
-                            src={animeTrailer.embed_url}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            title="Embedded youtube"
-                        />
-                    </Col>
-                </Row>
+                        <div class="card mt-3 shadow-lg p-3 mb-5 bg-body rounded">
+                            <div class="card-body">
+                                {animeGenre.map((genre, a) => (
+                                    <span class="card-link badge rounded-pill bg-dark card-title">{genre.name}</span>
+                                ))}
+                                <p class="card-text">{animeInfo.synopsis}</p>
+                                {animeStreaming.map((stream, a) => (
+                                    <a href={stream.url} class="card-link"><img width="30" height="30" src={"../../images/" + stream.name + ".png"} /></a>
 
-                <div class="card mt-3 shadow-lg p-3 mb-5 bg-body rounded">
-                    <div class="card-body">
-                        {animeGenre.map((genre, a) => (
-                            <span class="card-link badge rounded-pill bg-dark card-title">{genre.name}</span>
-                        ))}
-                        <p class="card-text">{animeInfo.synopsis}</p>
-                        {animeStreaming.map((stream, a) => (
-                            <a href={stream.url} class="card-link"><img width="30" height="30" src={"../../images/" + stream.name + ".png"} /></a>
-
-                        ))}
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </Container>
