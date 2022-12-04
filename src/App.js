@@ -11,9 +11,14 @@ import {configureStore}
     from '@reduxjs/toolkit';
 import EditProfile from "./components/EditProfile";
 import CurrentUser from "./components/CurrentUser";
+import AnimeSearch from "./components/AnimeSearch";
+import animeSearchReducer from "./reducers/anime-search-reducer";
 
-const store = configureStore(
-    {reducer: {userData: userReducer}});
+const store = configureStore({
+                reducer: {
+                    userData: userReducer,
+                    animeSearch:animeSearchReducer
+                }, });
 
 
 function App() {
@@ -24,6 +29,7 @@ function App() {
                         <div className="container">
                             <Routes>
                                 <Route index element={<HomeScreen/>}/>
+                                <Route path="/search" element={<AnimeSearch/>}/>
                                 <Route path="/login" element={<Login/>}/>
                                 <Route path="/register" element={<Register/>}/>
                                 <Route path="/profile" element={<ProfileItem/>}/>

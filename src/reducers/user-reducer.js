@@ -27,11 +27,9 @@ const userSlice = createSlice({
         },
         [profileThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload;
-            console.log('oops')
             console.log(state.currentUser)
         },
         [registerThunk.rejected]: (state, action) => {
-            console.log('whoops')
             state.error = action.payload;
         },
         [loginThunk.rejected]: (state, action) => {
