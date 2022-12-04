@@ -12,11 +12,12 @@ const FollowingItem = () => {
     const {followingList, loading} = useSelector(state => state.following)
     useEffect(() => {
         dispatch(findAllFollowersThunk(currentUser._id))
-    }, [])
+    });
     // console.log(followingList)
 
     return (
         <>
+           <h1> People you are following </h1>
             <ul className="list-group mt-2">
 
                 {

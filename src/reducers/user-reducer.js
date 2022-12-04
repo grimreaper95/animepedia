@@ -5,16 +5,14 @@ import {
     profileThunk,
     logoutThunk,
     updateProfileThunk,
-    findUserThunk
 } from "../services/user-thunk";
-import {findUser} from "../services/user-service";
 
 const userSlice = createSlice({
     name: 'users',
     initialState: {
         currentUser: null,
         error: null,
-        user: null
+
     },
     reducers: {
         logoutUser(state) {
@@ -61,10 +59,6 @@ const userSlice = createSlice({
             // }
             state.currentUser = action.payload
 
-        },
-        [findUserThunk.fulfilled]: (state, action) => {
-            console.log("thunk " + action.payload)
-            state.user = action.payload.user;
         }
     }
 });

@@ -1,24 +1,40 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {findUserThunk} from "../../services/user-thunk";
+import {findUser} from "../../services/user-service";
+import {useState} from "react";
+import {useNavigate} from "react-router";
 
+const FollowItemList = ({follow}) => {
 
-const FollowItemList = (follow) => {
-
-    const dispatch = useDispatch();
-    const {user} = useSelector(state => state.userData)
+    const [user, setUserData] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(findUserThunk(follow.userId))
+        console.log("Ping")
+        const getDataFromServer = async () => {
+            const userData = await findUser(follow.followingId)
+            console.log("data 1 " + userData)
+            setUserData(userData);
+
+        }
+
+        getDataFromServer();
+        console.log("user " + user)
+
     }, [])
-
-    console.log("user - " + user)
     return (
-        <>
-            <li className="list-group-item">
-                <h1> Follow {user.firstName} </h1>
 
-            </li>
+        <>{
+            user ?
+                <li
+                    className="list-group-item"
+                >
+                    <h1 >  {user.firstName} {user.lastName} </h1>
+                </li> : null
+        }
+
+
         </>
     )
 }
