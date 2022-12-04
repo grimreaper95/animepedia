@@ -13,6 +13,7 @@ import EditProfile from "./components/EditProfile";
 import CurrentUser from "./components/CurrentUser";
 import AnimeSearch from "./components/AnimeSearch";
 import animeSearchReducer from "./reducers/anime-search-reducer";
+import OtherUserProfile from "./components/OtherUserProfile";
 
 const store = configureStore({
                 reducer: {
@@ -35,6 +36,7 @@ function App() {
                                 <Route path="/profile" element={<ProfileItem/>}/>
                                 <Route path="detail/:id" element={<AnimeDetailScreen/>}/>
                                 <Route path="edit-profile" element={<EditProfile/>}/>
+                                <Route path="/profile/:usid" element={<OtherUserProfile/>}/>
                             </Routes>
                         </div>
                         </CurrentUser>
