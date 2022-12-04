@@ -1,5 +1,5 @@
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-import logo_test from "../../images/logo_test.png"
+// import logo_test from "../../images/logo_test.png"
 import './index.css'
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
@@ -23,7 +23,7 @@ const HeaderBar = () => {
             <Nav className="me-auto">
                 <Navbar.Brand href="/">
                   <img
-                      src={logo_test}
+                      src={"../../images/logo_test.png"}
                       className="d-inline-block align-top logo-image"
                       alt="AnimePedia"
                   />

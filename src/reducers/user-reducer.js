@@ -5,16 +5,14 @@ import {
     profileThunk,
     logoutThunk,
     updateProfileThunk,
-    findUserThunk
 } from "../services/user-thunk";
-import {findUser} from "../services/user-service";
 
 const userSlice = createSlice({
     name: 'users',
     initialState: {
         currentUser: null,
         error: null,
-        user: null
+
     },
     reducers: {
         logoutUser(state) {
@@ -25,6 +23,7 @@ const userSlice = createSlice({
     extraReducers: {
         [registerThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload;
+            state.currentUser = {...state.currentUser, currentUser: action.payload}
         },
         [loginThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload;
@@ -48,6 +47,7 @@ const userSlice = createSlice({
         [profileThunk.rejected]: (state, action) => {
             state.error = action.payload;
             state.currentUser = null;
+            // console.log('profile error')
         },
         [updateProfileThunk.fulfilled]: (state, action) => {
             // const userIndex = state.currentUser.findIndex(u => u._id === payload._id)
@@ -59,10 +59,6 @@ const userSlice = createSlice({
             // }
             state.currentUser = action.payload
 
-        },
-        [findUserThunk.fulfilled]: (state, action) => {
-            console.log("thunk " + action.payload)
-            state.user = action.payload.user;
         }
     }
 });
