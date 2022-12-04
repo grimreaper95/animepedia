@@ -23,7 +23,7 @@ const HeaderBar = () => {
             <Nav className="me-auto">
                 <Navbar.Brand href="/">
                   <img
-                      src={"../../images/logo_test.png"}
+                      src={"../../../images/logo_test.png"}
                       className="d-inline-block align-top logo-image"
                       alt="AnimePedia"
                   />
