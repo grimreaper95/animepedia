@@ -1,21 +1,38 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {findUser} from "../../services/user-service";
+import {useDispatch, useSelector} from "react-redux";
+import {addFollowerThunk} from "../../services/following-thunk";
+import {useNavigate} from "react-router";
 
 const OtherUserProfile = () => {
     const params = useParams();
-    const currentUser = params.usid;
+    const otherUser = params.usid;
     const [user, setUserData] = useState(null);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {currentUser} = useSelector(state => state.userData)
 
     useEffect(() => {
         const getDataFromServer = async () => {
-            const userData = await findUser(currentUser)
+            const userData = await findUser(otherUser)
             setUserData(userData);
 
         }
 
         getDataFromServer();
-    })
+    },[])
+
+    const addFollowerHandler = () => {
+        const userId = currentUser._id;
+        const followingId = user._id;
+        const follow = {userId,followingId}
+        dispatch(addFollowerThunk(follow));
+        alert("User added")
+        navigate("/profile")
+        console.log(follow)
+
+    }
 
     return (
         user ?
@@ -29,6 +46,12 @@ const OtherUserProfile = () => {
                 <div className="row">
                     <div className="col-8">
                         <h1 className=" text-secondary">@ {user.username}  </h1>
+                    </div>
+                    <div className="col-4">
+                        <button className="btn btn-primary rounded-pill float-end" onClick={addFollowerHandler}>
+                            Follow
+                        </button>
+
                     </div>
 
 
