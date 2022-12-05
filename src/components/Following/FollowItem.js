@@ -12,16 +12,13 @@ const FollowItemList = ({follow}) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("Ping")
         const getDataFromServer = async () => {
             const userData = await findUser(follow.followingId)
-            console.log("data 1 " + userData)
             setUserData(userData);
 
         }
 
         getDataFromServer();
-        console.log("user " + user)
 
     }, [])
     return (
