@@ -16,6 +16,7 @@ import animeSearchReducer from "./reducers/anime-search-reducer";
 import OtherUserProfile from "./components/OtherUserProfile";
 import Following from "./components/Following";
 import followingReducer from "./reducers/following-reducer";
+import UserSearch from "./components/UserSearch";
 
 const store = configureStore({
     reducer: {
@@ -42,6 +43,7 @@ function App() {
                             <Route path="edit-profile" element={<EditProfile/>}/>
                             <Route path="/profile/:usid" element={<OtherUserProfile/>}/>
                             <Route path="/follow/:usid" element={<Following/>}/>
+                            <Route path="/searchUsers/:usid" element={<UserSearch/>}/>
                         </Routes>
                     </div>
                 </CurrentUser>
