@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useParams, useNavigate, Link} from 'react-router-dom';
-import {findByUsername, findUser} from "../../services/user-service";
+import {findByUsername, findUser, searchByUsername} from "../../services/user-service";
 import {all} from "axios";
 import {ListGroupItem} from "react-bootstrap";
 
@@ -14,31 +14,28 @@ const UserSearch = () => {
 
     useEffect(() => {
         const getDataFromServer = async () => {
-            const userData = await findByUsername(param.usid)
+            const userData = await searchByUsername(param.usid)
             setAllUsers(userData);
-            console.log("allUsers " + JSON.stringify(allUsers))
+
         }
 
         getDataFromServer();
+        console.log("allUsers " + JSON.stringify(allUsers))
 
     }, [])
 
     return (
         <>
 
-            {/*{*/}
-            {/*    allUsers.map((user) => (*/}
-            {/*        <Link to={`../profile/${user._id}`}>*/}
-            {/*            <ListGroupItem>*/}
-            {/*                {user.username} ({user.role})*/}
-            {/*            </ListGroupItem>*/}
-            {/*        </Link>*/}
-            {/*    ))*/}
-            {/*}*/}
-
-
-
-            <h1> Name</h1>
+            {
+                allUsers.map((user) => (
+                    <Link to={`../profile/${user._id}`}>
+                        <ListGroupItem>
+                            @ {user.username} ({user.accountType})
+                        </ListGroupItem>
+                    </Link>
+                ))
+            }
 
         </>
     )

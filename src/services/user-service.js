@@ -35,8 +35,8 @@ export const updateProfile = async (user) =>{
     return user;
 }
 
-export const findByUsername = async (username) => {
-    const response = await api.get(`${API_BASE}/findByUsername/${username}`,username);
+export const searchByUsername = async (username) => {
+    const response = await api.get(`${API_BASE}/searchByUsername/${username}`,username);
     return response.data;
 }
 
