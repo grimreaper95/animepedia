@@ -34,7 +34,13 @@ const OtherUserProfile = () => {
                     setFollowingData(true);
 
                 }
+
             })
+
+            if (user._id === currentUser._id) {
+                setFollowingData(true);
+
+            }
 
         };
         checkFollowing();

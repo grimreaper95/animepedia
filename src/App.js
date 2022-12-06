@@ -18,6 +18,8 @@ import Following from "./components/Following";
 import followingReducer from "./reducers/following-reducer";
 import UserSearch from "./components/UserSearch";
 import randomAnimeReducer from "./reducers/random-anime-reducer";
+import AdminHomePage from "./components/AdminHome";
+import AdminLogin from "./components/AdminLogin";
 
 const store = configureStore({
     reducer: {
@@ -46,6 +48,8 @@ function App() {
                             <Route path="/profile/:usid" element={<OtherUserProfile/>}/>
                             <Route path="/follow/:usid" element={<Following/>}/>
                             <Route path="/searchUsers/:usid" element={<UserSearch/>}/>
+                            <Route path= "/admin" element={<AdminHomePage/>}/>
+                            <Route path= "/admin/login" element={<AdminLogin/>}/>
                         </Routes>
                     </div>
                 </CurrentUser>
