@@ -19,8 +19,8 @@ const RandomAnimeList = () => {
 
     return (
         <>
-            
-                <Row className="col-10">
+            <Container>
+                <Row>
                     {animeList.filter((anime, a) => a < 8).map((anime, a) => (
                         <Col key={a} xs={12} md={4} lg={3} sm={6}>
                             <Card className="shadow p-0 mb-5 bg-white rounded">
@@ -37,7 +37,7 @@ const RandomAnimeList = () => {
                         </Col>
                     ))}
                 </Row>
-           
+            </Container>
         </>
     )
 }
