@@ -50,11 +50,7 @@ const ProfileItem = () => {
                             Edit Profile
                         </button>
                     </div>
-
-
                 </div>
-
-
                 <div className="m-3 text-secondary">
                     <h3> Name : {currentUser.firstName} {currentUser.lastName}</h3>
                     <h3> Email Id : {currentUser.email} </h3>

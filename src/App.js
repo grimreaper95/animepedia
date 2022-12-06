@@ -17,11 +17,13 @@ import OtherUserProfile from "./components/OtherUserProfile";
 import Following from "./components/Following";
 import followingReducer from "./reducers/following-reducer";
 import UserSearch from "./components/UserSearch";
+import randomAnimeReducer from "./reducers/random-anime-reducer";
 
 const store = configureStore({
     reducer: {
         userData: userReducer,
         animeSearch: animeSearchReducer,
+        randomAnime: randomAnimeReducer,
         following: followingReducer
     },
 });

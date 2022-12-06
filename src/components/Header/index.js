@@ -45,7 +45,7 @@ const HeaderBar = () => {
                     !currentUser &&
                     <>
                         <Link to="/login" className="nav-link" href="#">Login</Link>
-                        <Link to="/register" className="nav-link" href="#">Register</Link>
+                        <Link to="/register" className="nav-link" href="#">Sign Up</Link>
                     </>
                 }
 
