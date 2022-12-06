@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {findAllFollowersThunk, addFollowerThunk} from "../services/following-thunk";
+import {findAllFollowersThunk, addFollowerThunk, unfollowThunk} from "../services/following-thunk";
 
 const followingSlice = createSlice({
     name: 'following',
@@ -11,8 +11,15 @@ const followingSlice = createSlice({
         [findAllFollowersThunk.fulfilled]: (state, action) => {
             state.followingList = action.payload;
         },
-        [addFollowerThunk.fulfilled] : (state, action) => {
+        [addFollowerThunk.fulfilled]: (state, action) => {
             state.followingList.push(action.payload)
+        },
+
+        [unfollowThunk.fulfilled]: (state, action) => {
+            state.followingList = state.followingList
+                .filter(f => f.userId !== action.payload.userId && f.followingId !== action.payload.followingId)
+
+
         }
     }
 

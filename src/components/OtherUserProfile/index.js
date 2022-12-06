@@ -2,8 +2,9 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {findUser} from "../../services/user-service";
 import {useDispatch, useSelector} from "react-redux";
-import {addFollowerThunk, findAllFollowersThunk} from "../../services/following-thunk";
+import {addFollowerThunk, findAllFollowersThunk, unfollowThunk} from "../../services/following-thunk";
 import {useNavigate} from "react-router";
+import {unfollow} from "../../services/following-service";
 
 const OtherUserProfile = () => {
     const params = useParams();
@@ -28,7 +29,6 @@ const OtherUserProfile = () => {
     useEffect(() => {
 
         const checkFollowing = async () => {
-            console.log({followingList})
             followingList.forEach(function (key, value) {
                 if (key.followingId === user._id) {
                     setFollowingData(true);
@@ -55,6 +55,15 @@ const OtherUserProfile = () => {
         alert("User added")
         navigate("/profile")
 
+    }
+
+    const unFollowHandler = () => {
+        const userId = currentUser._id;
+        const followingId = user._id;
+        const unfollowId = {userId, followingId}
+        dispatch(unfollowThunk(unfollowId));
+        alert("User removed")
+        navigate("/profile")
     }
 
 
@@ -84,7 +93,7 @@ const OtherUserProfile = () => {
 
                             {
                                 checkFollowingData &&
-                                <button className="btn btn-primary rounded-pill float-end" onClick={addFollowerHandler}>
+                                <button className="btn btn-primary rounded-pill float-end" onClick={unFollowHandler}>
                                     Unfollow
                                 </button>
                             }
