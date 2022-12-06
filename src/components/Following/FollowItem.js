@@ -1,10 +1,8 @@
 import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {findUserThunk} from "../../services/user-thunk";
 import {findUser} from "../../services/user-service";
 import {useState} from "react";
 import {useNavigate} from "react-router";
-import otherUserProfile from "../OtherUserProfile";
+
 
 const FollowItemList = ({follow}) => {
 
