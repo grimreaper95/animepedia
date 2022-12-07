@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addFollowerThunk, findAllFollowersThunk, unfollowThunk} from "../../services/following-thunk";
 import {useNavigate} from "react-router";
 import {unfollow} from "../../services/following-service";
+import HeaderBar from "../Header";
 
 const OtherUserProfile = () => {
     const params = useParams();
@@ -38,7 +39,7 @@ const OtherUserProfile = () => {
             })
 
             if (user._id === currentUser._id) {
-                setFollowingData(true);
+                navigate("/profile");
 
             }
 
@@ -70,6 +71,7 @@ const OtherUserProfile = () => {
     return (
         user ?
             <div className="position-relative ">
+                <HeaderBar/>
                 <img src={('../../images/profile_banner.png')} className=" img w-100 "/><br/>
                 <div className="col-3 position-absolute top-50 ms-2">
                     <img className="rounded-circle img-fluid img-thumbnail" src={('../../images/profile.jpg')}
