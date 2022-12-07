@@ -4,13 +4,14 @@ import {profileThunk} from "../../services/user-thunk";
 import "./index.css"
 import {useNavigate} from "react-router";
 import Following from "../Following";
+import {Link} from "react-router-dom";
 
 const ProfileItem = () => {
 
     const {currentUser} = useSelector(state => state.userData)
     const [editProfile, setEditProfile] = useState(false);
     const navigate = useNavigate();
-
+    const [input, setInput] = useState();
     const editClickHandler = () => {
         setEditProfile(true);
         navigate("/edit-profile");
@@ -19,6 +20,19 @@ const ProfileItem = () => {
 
     return (
         <>
+
+            <input
+                type="text"
+                className="form-control"
+                placeholder="Search for fellow users!"
+                value={input}
+                onInput={(e) => setInput(e.target.value)}
+            />
+            <Link to={`/searchUsers/${input}`}>
+                <button className="btn btn-primary">
+                    Search
+                </button>
+            </Link>
             <div className="position-relative ">
                 <img src={('../../images/profile_banner.png')} className=" img w-100 "/><br/>
                 <div className="col-3 position-absolute top-50 ms-2">
@@ -36,11 +50,7 @@ const ProfileItem = () => {
                             Edit Profile
                         </button>
                     </div>
-
-
                 </div>
-
-
                 <div className="m-3 text-secondary">
                     <h3> Name : {currentUser.firstName} {currentUser.lastName}</h3>
                     <h3> Email Id : {currentUser.email} </h3>

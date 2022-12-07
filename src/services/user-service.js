@@ -35,6 +35,11 @@ export const updateProfile = async (user) =>{
     return user;
 }
 
+export const searchByUsername = async (username) => {
+    const response = await api.get(`${API_BASE}/searchByUsername/${username}`,username);
+    return response.data;
+}
+
 // export const getLoggedInUserDetails = () => {
 //     try {
 //         const userDetails = localStorage.getItem("user");

@@ -5,21 +5,24 @@ import {searchAnimeThunk} from "../services/anime-search-thunk";
 const animeSearchSlice = createSlice({
     name: 'animeSearch',
     initialState : {
-        animeList: [],
-        loading: false,
-        details: {}
+        searchAnimeList: [],
+        loading: false
+    },
+    reducers: {
+        resetSearch(state, action) {
+            state.searchAnimeList = []
+        },
     },
     extraReducers: {
         [searchAnimeThunk.pending]: (state, action) => {
             state.loading = true
-            state.animeList = []
+            state.searchAnimeList = []
         },
         [searchAnimeThunk.fulfilled]: (state, action) => {
-            console.log(action.payload)
-            state.animeList = action.payload
+            state.searchAnimeList = action.payload
             state.loading = false
         }
     }
 })
-
+export const {resetSearch} = animeSearchSlice.actions;
 export default animeSearchSlice.reducer

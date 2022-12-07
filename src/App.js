@@ -16,11 +16,16 @@ import animeSearchReducer from "./reducers/anime-search-reducer";
 import OtherUserProfile from "./components/OtherUserProfile";
 import Following from "./components/Following";
 import followingReducer from "./reducers/following-reducer";
+import UserSearch from "./components/UserSearch";
+import randomAnimeReducer from "./reducers/random-anime-reducer";
+import AdminHomePage from "./components/AdminHome";
+import AdminLogin from "./components/AdminLogin";
 
 const store = configureStore({
     reducer: {
         userData: userReducer,
         animeSearch: animeSearchReducer,
+        randomAnime: randomAnimeReducer,
         following: followingReducer
     },
 });
@@ -42,6 +47,9 @@ function App() {
                             <Route path="edit-profile" element={<EditProfile/>}/>
                             <Route path="/profile/:usid" element={<OtherUserProfile/>}/>
                             <Route path="/follow/:usid" element={<Following/>}/>
+                            <Route path="/searchUsers/:usid" element={<UserSearch/>}/>
+                            <Route path= "/admin" element={<AdminHomePage/>}/>
+                            <Route path= "/admin/login" element={<AdminLogin/>}/>
                         </Routes>
                     </div>
                 </CurrentUser>

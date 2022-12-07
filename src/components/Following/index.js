@@ -10,10 +10,10 @@ const FollowingItem = () => {
     const dispatch = useDispatch();
 
     const {followingList, loading} = useSelector(state => state.following)
+
     useEffect(() => {
         dispatch(findAllFollowersThunk(currentUser._id))
-    });
-    // console.log(followingList)
+    } , []);
 
     return (
         <>

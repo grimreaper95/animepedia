@@ -38,14 +38,16 @@ const HeaderBar = () => {
                     <>
                         <Nav.Link>Welcome {currentUser.username}</Nav.Link>
                         <Nav.Link onClick={handleLogout} className="nav-link" href="#">Logout</Nav.Link>
-                        <Link to="/profile" className="nav-link" href="#">Profile</Link>
+                        <Nav.Link to="/profile" className="nav-link" href="#">Profile</Nav.Link>
+
                     </>
                 }
                 {
                     !currentUser &&
                     <>
                         <Link to="/login" className="nav-link" href="#">Login</Link>
-                        <Link to="/register" className="nav-link" href="#">Register</Link>
+                        <Link to="/register" className="nav-link" href="#">Sign Up</Link>
+                        <Link to="/admin/login" className="nav-link" href="#">Admin</Link>
                     </>
                 }
 
