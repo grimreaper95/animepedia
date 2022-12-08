@@ -3,8 +3,8 @@ import {
     addReviewerThunk,
     getAdminDetailsThunk,
     getReviewerListThunk,
-    loginThunk,
-    logoutThunk
+    adminLoginThunk,
+    adminLogoutThunk
 } from "../services/admin-thunk";
 
 const adminSlice = createSlice({
@@ -15,17 +15,20 @@ const adminSlice = createSlice({
         },
 
         extraReducers: {
-            [loginThunk.fulfilled]: (state, action) => {
+            [adminLoginThunk.fulfilled]: (state, action) => {
+                console.log("action" + action.payload)
+                state.currentAdmin = action.payload
                 state.currentAdmin = {...state.currentAdmin, currentAdmin: action.payload}
-                console.log(state.currentAdmin)
+                console.log("red " + state)
 
             },
-            [loginThunk.rejected]: (state, action) => {
+            [adminLoginThunk.rejected]: (state, action) => {
                 state.currentUser = null;
                 alert('Invalid username or password.  Try again!');
             },
             [getAdminDetailsThunk.fulfilled]: (state, action) => {
                 state.currentAdmin = action.payload
+                console.log("red " + state)
             },
             [addReviewerThunk.fulfilled]: (state, action) => {
                 state.approvedList.push(action.payload)
@@ -33,7 +36,7 @@ const adminSlice = createSlice({
             [getReviewerListThunk.fulfilled]: (state, action) => {
                 state.approvedList = action.payload
             },
-            [logoutThunk.fulfilled]: (state, action) => {
+            [adminLogoutThunk.fulfilled]: (state, action) => {
                 state.currentAdmin = null;
             }
         }

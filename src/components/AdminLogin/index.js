@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {loginThunk} from "../../services/admin-thunk";
+import {adminLoginThunk, loginThunk} from "../../services/admin-thunk";
 import {useNavigate} from "react-router";
 
 const AdminLogin = () => {
@@ -21,7 +21,7 @@ const AdminLogin = () => {
     const handleLoginBtn = () => {
         const adminData = {username, password}
         console.log(adminData)
-        dispatch(loginThunk(adminData)).then(
+        dispatch(adminLoginThunk(adminData)).then(
             () => {
                 console.log(currentAdmin)
                 if(currentAdmin){

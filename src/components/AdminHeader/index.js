@@ -1,6 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {useEffect, useState} from "react";
+import {getAdminDetailsThunk} from "../../services/admin-thunk";
 
 const AdminHeader = () => {
 
@@ -10,16 +11,17 @@ const AdminHeader = () => {
 
     const handleLogout = () => {
 
+
     }
 
     useEffect(() => {
-        dispatch()
-
+        dispatch(getAdminDetailsThunk)
+        console.log("head" + currentAdmin)
         setFirstName(currentAdmin.username)
-        console.log(currentAdmin.username)
+
         console.log(firstName)
 
-    }, [])
+    }, [currentAdmin])
 
 
     return (

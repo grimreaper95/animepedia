@@ -4,12 +4,12 @@ const api = axios.create({withCredentials: true});
 
 const API_BASE = 'http://localhost:4000';
 
-export const login = async (admin) => {
+export const adminLogin = async (admin) => {
     const response = await api.post(`${API_BASE}/admin/login`, admin);
     return response.data;
 }
 
-export const logout = async () => {
+export const adminLogout = async () => {
     const response = await api.post(`${API_BASE}/admin/logout`)
     return response.data;
 }
