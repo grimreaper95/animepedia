@@ -11,15 +11,26 @@ const AdminLogin = () => {
     const {currentAdmin} = useSelector(state => state.adminData);
     const navigate = useNavigate()
 
+    useEffect(() => {
+        if(currentAdmin) {
+            navigate("/admin")
+        }
+    },[currentAdmin,navigate])
+
+
     const handleLoginBtn = () => {
         const adminData = {username, password}
         console.log(adminData)
-        dispatch(loginThunk(adminData))
+        dispatch(loginThunk(adminData)).then(
+            () => {
+                console.log(currentAdmin)
+                if(currentAdmin){
+                    navigate("/admin")
+                }
+            }
+        )
 
-        console.log(currentAdmin)
-        if(currentAdmin){
-            navigate("/admin")
-        }
+
 
     }
 
