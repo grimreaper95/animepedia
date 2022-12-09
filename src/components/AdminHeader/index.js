@@ -2,15 +2,18 @@ import {useDispatch, useSelector} from "react-redux";
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {adminLogoutThunk, getAdminDetailsThunk} from "../../services/admin-thunk";
+import {useNavigate} from "react-router";
 
 const AdminHeader = () => {
 
     const {currentAdmin} = useSelector(state => state.adminData)
     const [firstName, setFirstName] = useState()
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         dispatch(adminLogoutThunk())
+        navigate("/")
     }
 
     useEffect(() => {
@@ -34,7 +37,7 @@ const AdminHeader = () => {
                               </span>
                         </Navbar.Brand>
                     </Nav>
-                    <Nav>
+                    <Nav >
                         {currentAdmin &&
                             <>
                                 Welcome {currentAdmin[0].username}
