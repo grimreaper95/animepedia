@@ -3,6 +3,7 @@ import AdminHeader from "../AdminHeader";
 
 const AdminHomePage = () => {
 
+    const pendingList = [];
 
 
     return(
