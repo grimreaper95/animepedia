@@ -48,10 +48,10 @@ const AnimeDetail = () => {
                 </Row>
 
                 <Row className="mt-3 photo-section">
-                    <Col>
+                    <Col class="col-3">
                         <img height="320" src={animeImage.image_url} />
                     </Col>
-                    <Col className="video-responsive">
+                    <Col className="video-responsive col-9">
                         <iframe
                             src={animeTrailer.embed_url}
                             frameBorder="0"

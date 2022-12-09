@@ -1,6 +1,5 @@
 import HeaderBar from "../Header";
 import RandomAnimeList from "../RandomAnimeComponent";
-import NavigationSidebar from "../NavigationSidebar";
 import { Container } from "react-bootstrap";
 import AnimeSearch from "../AnimeSearch";
 import React from "react";
@@ -10,13 +9,8 @@ const HomeScreen = () => {
     <>
       <HeaderBar />
       <Container>
-        <div className="row mt-2">
-          <div className="col-2">
-            <NavigationSidebar active="explore" />
-          </div>
             <AnimeSearch/>
             <RandomAnimeList/>
-        </div>
       </Container>
     </>
   );

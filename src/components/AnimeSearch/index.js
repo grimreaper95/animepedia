@@ -38,8 +38,8 @@ const AnimeSearch = () => {
                 </div>
             </div>
 
-                <div className="d-flex justify-content-end push-top">
-                    <Row className="col-10" >
+                <div className="d-flex justify-content-end mt-5">
+                    <Row>
                         {
                             (searchQuery!=='') && searchAnimeList && searchAnimeList.map((anime, a) =>
                             <Col key={a} xs={12} md={4} lg={3} sm={6}>
