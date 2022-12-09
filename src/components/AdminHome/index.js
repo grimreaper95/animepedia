@@ -12,8 +12,7 @@ import {Button} from "react-bootstrap";
 const AdminHomePage = () => {
 
     const [pendingList, setPendingList] = useState([]);
-    const [reviewerDetails, setReviewerDetails] = useState(null);
-    const [approved, setApproved] = useState(null)
+    const [approved, setApproved] = useState([])
 
     const handleApprove = async (rId) => {
         const details = await findReviewer(rId);
@@ -24,7 +23,15 @@ const AdminHomePage = () => {
             const updated = {...details, approved: true}
             console.log("u " + updated._id)
             const updateApprove = await updateReviewer(updated)
-            setReviewerDetails(null)
+
+            const updatedPendingList = pendingList.filter((p) => p._id !== updated._id)
+            setPendingList(updatedPendingList)
+            console.log("pendingList " + pendingList)
+
+            console.log("approved1 " + approved)
+            approved.push(updated)
+            setApproved(approved)
+            console.log("approved " + approved)
 
         }
 
@@ -33,9 +40,9 @@ const AdminHomePage = () => {
     const handleDecline = async (rId) => {
 
         const declineReq = await deleteReviewer(rId);
-        console.log(declineReq)
+        const updatedPendingList = pendingList.filter((p) => p._id !== rId)
+        setPendingList(updatedPendingList)
     }
-
 
 
     useEffect(() => {
@@ -45,25 +52,24 @@ const AdminHomePage = () => {
             setPendingList(pendingListResponse)
         }
 
-        // const getApprovedList = async () => {
-        //     const approvedListResponse = await getApprovedReviewers()
-        //     setApproved(approvedListResponse)
-        // }
+        const getApprovedList = async () => {
+            const approvedListResponse = await getApprovedReviewers()
+            console.log(approvedListResponse)
+            setApproved(approvedListResponse)
+        }
 
         getPendingList();
-        // getApprovedList();
-        console.log(pendingList)
+        getApprovedList();
+        console.log(approved)
 
     }, [])
 
     return (
         <>
             <AdminHeader/>
-
             {
                 pendingList ?
                     <>
-
                         <h1> Reviewers Pending to Approve</h1>
                         <ul>
                             {pendingList.map((item) => (
@@ -101,7 +107,28 @@ const AdminHomePage = () => {
 
 
                     : null
+            }
 
+            {
+                approved ?
+                    <>
+
+                        <h1> Approved </h1>
+                        <ul>
+                            {
+                                approved.map((item) => (
+
+                                        <li>
+                                            {item.username}
+
+                                        </li>
+                                    )
+                                )
+                            }
+                        </ul>
+                    </>
+
+                    : null
             }
 
 
