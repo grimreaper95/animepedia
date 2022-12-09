@@ -5,6 +5,7 @@ import "./index.css"
 import {useNavigate} from "react-router";
 import Following from "../Following";
 import {Link} from "react-router-dom";
+import HeaderBar from "../Header";
 
 const ProfileItem = () => {
 
@@ -20,7 +21,7 @@ const ProfileItem = () => {
 
     return (
         <>
-
+            <HeaderBar/>
             <input
                 type="text"
                 className="form-control"

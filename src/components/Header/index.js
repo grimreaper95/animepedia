@@ -38,7 +38,7 @@ const HeaderBar = () => {
                     <>
                         <Nav.Link>Welcome {currentUser.username}</Nav.Link>
                         <Nav.Link onClick={handleLogout} className="nav-link" href="#">Logout</Nav.Link>
-                        <Nav.Link to="/profile" className="nav-link" href="#">Profile</Nav.Link>
+                        <Link to="/profile" className="nav-link" href="#">Profile</Link>
 
                     </>
                 }
