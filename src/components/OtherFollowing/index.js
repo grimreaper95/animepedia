@@ -1,18 +1,20 @@
 import React, {useEffect, useState} from "react";
 import {findAllFollowersThunk} from "../../services/following-thunk";
 import {useDispatch, useSelector} from "react-redux";
-import OtherFollowingItem from "../OtherFollowing/OtherFollowingItem";
 
-const FollowingItem = () => {
+import {useParams} from "react-router-dom";
+import OtherFollowingItem from "./OtherFollowingItem";
 
+const OtherFollowing = () => {
 
-    const {currentUser} = useSelector(state => state.userData)
+    const param = useParams();
+
     const dispatch = useDispatch();
 
     const {followingList, loading} = useSelector(state => state.following)
 
     useEffect(() => {
-        dispatch(findAllFollowersThunk(currentUser._id))
+        dispatch(findAllFollowersThunk(param.usid))
     } , []);
 
     return (
@@ -20,7 +22,7 @@ const FollowingItem = () => {
             <div className="list-group">
 
 
-           <div className="list-group-item"><h2> People You Follow </h2></div>
+                <div className="list-group-item"><h2> People They Follow </h2></div>
 
 
                 {
@@ -39,4 +41,4 @@ const FollowingItem = () => {
 
 }
 
-export default FollowingItem;
+export default OtherFollowing;

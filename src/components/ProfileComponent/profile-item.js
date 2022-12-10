@@ -74,6 +74,8 @@ const ProfileItem = () => {
 
                     </div>
 
+                    <h1>Animes You Liked </h1>
+                    <LikedAnime/>
 
                 </div>
                 <div className="col">
@@ -81,8 +83,7 @@ const ProfileItem = () => {
                 </div>
 
             </div>
-            <h1>Animes liked by you: </h1>
-            <LikedAnime/>
+
 
         </>
     )

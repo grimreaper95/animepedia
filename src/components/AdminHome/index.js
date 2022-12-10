@@ -69,41 +69,43 @@ const AdminHomePage = () => {
             <AdminHeader/>
             {
                 pendingList ?
-                    <>
+                    <div className= "container">
                         <h1> Reviewers Pending to Approve</h1>
                         <ul>
                             {pendingList.map((item) => (
 
-                                <li className="m-2">
-                                    <div className="row">
-                                        <div className="col-8">
-                                            {item.username}
-                                        </div>
-                                        <div className="col-2">
+                                <div className="list-group m-2">
+                                    <div className="list-group-item ">
+                                        <div className="row">
+                                            <div className="col-8">
+                                                {item.username}
+                                            </div>
+                                            <div className="col-2">
 
-                                            <Button
-                                                onClick={() => handleApprove(item._id)}
-                                                className="btn btn-primary">
-                                                Approve
-                                            </Button>
-                                        </div>
+                                                <Button
+                                                    onClick={() => handleApprove(item._id)}
+                                                    className="btn btn-success">
+                                                    Approve
+                                                </Button>
+                                            </div>
 
-                                        <div className="col-2">
-                                            <Button
-                                                onClick={() => handleDecline(item._id)}
+                                            <div className="col-2">
+                                                <Button
+                                                    onClick={() => handleDecline(item._id)}
 
-                                                className="btn btn-danger">
-                                                Decline
-                                            </Button>
+                                                    className="btn btn-danger">
+                                                    Decline
+                                                </Button>
+                                            </div>
                                         </div>
                                     </div>
 
-                                </li>
+                                </div>
 
                             ))}
                         </ul>
 
-                    </>
+                    </div>
 
 
                     : null
@@ -111,22 +113,23 @@ const AdminHomePage = () => {
 
             {
                 approved ?
-                    <>
+                    <div className="container">
 
                         <h1> Approved </h1>
-                        <ul>
+                        <div className="list-group m-2">
                             {
                                 approved.map((item) => (
+                                    <div className="list-group m-2">
+                                        <div className="list-group-item">
+                                            @ {item.username}
 
-                                        <li>
-                                            {item.username}
-
-                                        </li>
+                                        </div>
+                                    </div>
                                     )
                                 )
                             }
-                        </ul>
-                    </>
+                        </div>
+                    </div>
 
                     : null
             }

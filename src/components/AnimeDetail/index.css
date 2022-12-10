@@ -29,3 +29,11 @@
   .checked {
     color: orange;
   }
+
+  .like-selected {
+      color: black;
+  }
+
+  .like-unselected {
+      color: rgb(110, 118, 125);
+  }

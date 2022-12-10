@@ -16,7 +16,7 @@ import {
     faThumbsUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { findUser } from "../../services/user-service";
-import { getLikesCount } from "../../services/liked-anime-service";
+import {getLikesCount, getUserLikesAnime} from "../../services/liked-anime-service";
 
 const AnimeDetail = () => {
     const params = useParams();
@@ -30,9 +30,9 @@ const AnimeDetail = () => {
     const [reviewList, setReviewList] = useState([]);
     const [rating, setRating] = useState(0)
     const dispatch = useDispatch();
-    const [animeLike, setAnimeLike] = useState(0);
+    const [animeLikes, setAnimeLikes] = useState(0);
     const [reviewerList, setReviewer] = useState([])
-
+    const [userLikesAnime, setUserLikesAnime] = useState(false);
 
     const reviewClickHAndler = () => {
         const newReview = {
@@ -61,9 +61,12 @@ const AnimeDetail = () => {
     const onPointerLeave = () => console.log('Leave')
     const onPointerMove = (value, index) => console.log(value, index)
 
-    const likeAnimeHandler = () => {
+    const likeAnimeHandler = async () => {
         if (!currentUser) {
             alert('You need to login to perform this action!')
+            return;
+        }
+        if (userLikesAnime) {
             return;
         }
         const userLikedAnime = {
@@ -73,6 +76,8 @@ const AnimeDetail = () => {
             animeTitle: animeInfo.title
         }
         dispatch(addLikedAnimeThunk(userLikedAnime))
+        setAnimeLikes(animeLikes + 1)
+        setUserLikesAnime(true)
     }
 
     useEffect(() => {
@@ -105,15 +110,22 @@ const AnimeDetail = () => {
 
         const getTotalLikes = async () => {
             const animeLikes = await getLikesCount(params.id)
-            // setUserData(userData);
-            console.log(animeLikes)
-            setAnimeLike(animeLikes)
+            setAnimeLikes(animeLikes)
+        }
+
+        const checkIfUserLikesAnime = async () => {
+            const userLikesAnime = await getUserLikesAnime(
+                {
+                    userId: currentUser._id,
+                    animeId: params.id
+                });
+            setUserLikesAnime(userLikesAnime)
         }
 
         fetchData()
         getReviewList();
         getTotalLikes();
-
+        checkIfUserLikesAnime();
     }, [])
 
 
@@ -142,9 +154,10 @@ const AnimeDetail = () => {
                             <img height="320" src={animeImage.image_url} />
 
                         </div>
-                        <a className={`text-decoration-none ${animeLike > 0 ? 'wd-reaction-tab-selected' : ''}`}>
+                        <a className={`${userLikesAnime? 'like-selected':'like-unselected'}`}>
                             <FontAwesomeIcon icon={faThumbsUp} onClick={likeAnimeHandler} />
                         </a>
+                        { } {animeLikes} likes
                     </Col>
                     <Col className="video-responsive col-9">
                         <iframe
