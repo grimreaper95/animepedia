@@ -18,7 +18,6 @@ const EditProfile = (editProfile) => {
         const updatedProfile = currentUser;
         dispatch(updateProfileThunk(updatedProfile))
         navigate("/profile")
-
     }
 
     const saveClickHandler = () => {

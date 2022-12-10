@@ -21,6 +21,7 @@ import randomAnimeReducer from "./reducers/random-anime-reducer";
 import AdminHomePage from "./components/AdminHome";
 import AdminLogin from "./components/AdminLogin";
 import adminReducer from "./reducers/admin-reducer";
+import reviewReducer from "./reducers/review-reducer";
 
 const store = configureStore({
     reducer: {
@@ -28,7 +29,8 @@ const store = configureStore({
         animeSearch: animeSearchReducer,
         randomAnime: randomAnimeReducer,
         following: followingReducer,
-        adminData: adminReducer
+        adminData: adminReducer,
+        review: reviewReducer
     },
 });
 

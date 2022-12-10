@@ -5,7 +5,8 @@ const api = axios.create({withCredentials: true});
 const API_BASE = 'http://localhost:4000';
 
 export const findAllReviewsForAnime = async (animeId) => {
-    const response = await api.get(`${API_BASE}/review/anime/${animeId}`, animeId);
+    const response = await api.get(`${API_BASE}/review/anime/${animeId}`);
+    console.log(response);
     return response;
 }
 
@@ -15,6 +16,7 @@ export const findAllReviewsByUser = async (userId) => {
 }
 
 export const createReview = async (review) => {
+    console.log('in service', review)
     const response = await api.post(`${API_BASE}/review`, review)
     return response;
 }
