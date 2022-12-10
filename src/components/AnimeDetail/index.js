@@ -222,7 +222,7 @@ const AnimeDetail = () => {
                                     <Card.Body>
                                         <div className="row">
                                             <div className="col-4">
-                                                <img className="rounded-circle" height={48} src={`/images/profile.png`} />
+                                                <img className="rounded-circle" height={48} src={`/images/profile.jpg`} />
                                             </div>
                                             <div className="col-8">
                                                 <div className="fw-bold">{reviewerList[a].firstName} {reviewerList[a].lastName}</div>
