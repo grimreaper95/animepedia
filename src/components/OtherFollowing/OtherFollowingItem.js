@@ -8,7 +8,6 @@ import {Link} from "react-router-dom";
 const OtherFollowingItem = ({follow}) => {
 
     const [user, setUserData] = useState(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const getDataFromServer = async () => {
@@ -17,6 +16,7 @@ const OtherFollowingItem = ({follow}) => {
         }
         getDataFromServer();
     }, [])
+
     return (
 
         <>{
@@ -25,8 +25,11 @@ const OtherFollowingItem = ({follow}) => {
                     className="list-group-item fw-bold"
                 >
                     <Link to={`/profile/${user._id}`}
-                          className="text-secondary link-primary">  {user.firstName} {user.lastName} </Link>
-                </div> : null
+                          className="text-secondary link-primary"
+                    >  {user.firstName} {user.lastName} </Link>
+                </div>
+                : null
+
         }
 
 

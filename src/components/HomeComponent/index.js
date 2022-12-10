@@ -1,18 +1,46 @@
 import HeaderBar from "../Header";
 import RandomAnimeList from "../RandomAnimeComponent";
-import { Container } from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import AnimeSearch from "../AnimeSearch";
-import React from "react";
+import React, {useEffect} from "react";
 import "./index.css"
+import {useSelector} from "react-redux";
+import LikedAnime from "../LikedAnime";
+
 const HomeScreen = () => {
-  return (
-    <>
-      <HeaderBar />
-      <Container>
-            <AnimeSearch/>
-            <RandomAnimeList/>
-      </Container>
-    </>
-  );
+
+    const {currentUser} = useSelector(state => state.userData)
+
+    useEffect(() => {
+        console.log(currentUser.accountType)
+
+    }, [])
+    return (
+        <>
+            <HeaderBar/>
+            <Container>
+                <AnimeSearch/>
+                <RandomAnimeList/>
+                {
+                    currentUser ? <>
+                        {currentUser.accountType === 'USER' ? <>
+                            <h1> Animes Liked </h1>
+
+                            <LikedAnime/>
+                        </> : null}
+
+                        {currentUser.accountType === 'REVIEWER' ? <>
+                            <h1> Reviews Posted </h1>
+
+
+                        </> : null}
+
+
+                    </> : null
+
+                }
+            </Container>
+        </>
+    );
 }
 export default HomeScreen;

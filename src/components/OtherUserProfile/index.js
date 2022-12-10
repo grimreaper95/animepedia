@@ -33,9 +33,10 @@ const OtherUserProfile = () => {
 
         const checkFollowing = async () => {
             followingList.forEach(function (key, value) {
+                console.log("foll" + key.followingId)
+                console.log("foll" + user._id)
                 if (key.followingId === user._id) {
                     setFollowingData(true);
-
                 }
 
             })
@@ -55,8 +56,7 @@ const OtherUserProfile = () => {
         const followingId = user._id;
         const follow = {userId, followingId}
         dispatch(addFollowerThunk(follow));
-        alert("User added")
-        navigate("/profile")
+        alert("User Followed")
 
     }
 
@@ -65,8 +65,7 @@ const OtherUserProfile = () => {
         const followingId = user._id;
         const unfollowId = {userId, followingId}
         dispatch(unfollowThunk(unfollowId));
-        alert("User removed")
-        navigate("/profile")
+        alert("User Unfollowed")
     }
 
 
