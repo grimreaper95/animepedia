@@ -25,3 +25,12 @@
   .badge {
     font-size: 1em;
   }
+
+
+  .like-selected {
+      color: black;
+  }
+
+  .like-unselected {
+      color: rgb(110, 118, 125);
+  }

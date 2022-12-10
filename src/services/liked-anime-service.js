@@ -15,8 +15,13 @@ export const addLikedAnime = async (userLikedAnime) => {
 }
 
 export const getLikesCount = async (animeId) => {
-    console.log('getting total likes for: ' + animeId);
     const response = await api.get(`${API_BASE}/likescount/${animeId}`, animeId);
-    console.log('total likes for: ' + animeId + ' are: ' + response.data.length);
     return response.data.length
+}
+
+export const getUserLikesAnime = async (useranime) => {
+    console.log('checking for: ' + useranime.userId +  ' ' + useranime.animeId);
+    const response = await api.get(`${API_BASE}/userlikesanime/${useranime.userId}/${useranime.animeId}`, useranime);
+    console.log('user likes anime result ' + response.data);
+    return response.data
 }
