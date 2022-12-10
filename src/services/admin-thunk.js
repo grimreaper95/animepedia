@@ -1,4 +1,4 @@
-import {addReviewer, adminLogin, getAdminDetails, getReviewerList} from "./admin-service";
+import {addReviewer, adminLogin, adminLogout, getAdminDetails, getReviewerList} from "./admin-service";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 
 export const adminLoginThunk = createAsyncThunk(
@@ -8,7 +8,7 @@ export const adminLoginThunk = createAsyncThunk(
 
 export const adminLogoutThunk = createAsyncThunk(
     'adminLogout',
-    async () => await adminLogin()
+    async () => await adminLogout()
 )
 
 export const getReviewerListThunk = createAsyncThunk(
