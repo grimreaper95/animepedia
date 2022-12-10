@@ -69,7 +69,7 @@ const AdminHomePage = () => {
             <AdminHeader/>
             {
                 pendingList ?
-                    <>
+                    <div className= "container">
                         <h1> Reviewers Pending to Approve</h1>
                         <ul>
                             {pendingList.map((item) => (
@@ -105,7 +105,7 @@ const AdminHomePage = () => {
                             ))}
                         </ul>
 
-                    </>
+                    </div>
 
 
                     : null
@@ -113,22 +113,23 @@ const AdminHomePage = () => {
 
             {
                 approved ?
-                    <>
+                    <div className="container">
 
                         <h1> Approved </h1>
-                        <div className="list-group">
+                        <div className="list-group m-2">
                             {
                                 approved.map((item) => (
-
+                                    <div className="list-group m-2">
                                         <div className="list-group-item">
-                                            {item.username}
+                                            @ {item.username}
 
                                         </div>
+                                    </div>
                                     )
                                 )
                             }
                         </div>
-                    </>
+                    </div>
 
                     : null
             }

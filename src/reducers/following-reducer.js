@@ -7,6 +7,13 @@ const followingSlice = createSlice({
         followingList: [],
         loading: false
     },
+    reducers : {
+       makeListNull(state) {
+           state.followingList = null;
+           return state
+       }
+
+    },
     extraReducers: {
         [findAllFollowersThunk.fulfilled]: (state, action) => {
             state.followingList = action.payload;
@@ -26,3 +33,4 @@ const followingSlice = createSlice({
 })
 
 export default followingSlice.reducer
+export const {makeListNull} = followingSlice.actions
