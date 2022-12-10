@@ -147,6 +147,22 @@ const AnimeDetail = () => {
                         </div>
                     </div>
                 </div>
+
+                <div>
+                    <Row class="mt-5 justify-content-center align-items-stretch">
+                        {reviewList.filter((review, a) => a < 8).map((review, a) => (
+                            <Col key={a} xs={12} md={4} lg={3} sm={6}>
+                                <Card className="shadow p-0 mb-5 bg-white rounded">
+                                    <Card.Body>
+                                    <Card.Title>{review.reviewBy}</Card.Title>
+                                    <Card.Text>{review.review}</Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))}
+                    </Row>
+
+                </div>
             </Container>
         </>
     )
