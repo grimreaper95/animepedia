@@ -6,6 +6,8 @@ import {addFollowerThunk, findAllFollowersThunk, unfollowThunk} from "../../serv
 import {useNavigate} from "react-router";
 import {unfollow} from "../../services/following-service";
 import HeaderBar from "../Header";
+import Following from "../Following";
+import OtherFollowing from "../OtherFollowing";
 
 const OtherUserProfile = () => {
     const params = useParams();
@@ -69,51 +71,71 @@ const OtherUserProfile = () => {
 
 
     return (
+
+
         user ?
-            <div className="position-relative ">
+            <>
                 <HeaderBar/>
-                <img src={('../../images/profile_banner.png')} className=" img w-100 "/><br/>
-                <div className="col-3 position-absolute top-50 ms-2">
-                    <img className="rounded-circle img-fluid img-thumbnail" src={('../../images/profile.jpg')}
-                    />
-                </div>
-                <div className="p-2 name">
-                    <div className="row">
-                        <div className="col-8">
-                            <h1 className=" text-secondary">@ {user.username}  </h1>
+                <div className="row mx-5">
+                    <div className="col-9">
+
+                        <div className="position-relative ">
+
+                            <img src={('../../images/banner_home.jpeg')} className=" img w-100 "/><br/>
+                            <div className="col-3 position-absolute top-50 ms-2">
+                                <img className="rounded-circle img-fluid img-thumbnail"
+                                     src={('../../images/profile_1.jpeg')}
+                                />
+                            </div>
+                        </div>
+                        <div className="p-2 name">
+                            <div className="row">
+                                <div className="col-8">
+                                    <h1 className=" text-secondary">@ {user.username}  </h1>
+
+                                </div>
+                                <div className="col-4">
+
+
+                                    {
+                                        !checkFollowingData &&
+                                        <button className="btn btn-dark  float-end"
+                                                onClick={addFollowerHandler}>
+                                            Follow
+                                        </button>
+                                    }
+
+                                    {
+                                        checkFollowingData &&
+                                        <button className="btn btn-dark  float-end"
+                                                onClick={unFollowHandler}>
+                                            Unfollow
+                                        </button>
+                                    }
+
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div className="m-3 text-secondary">
+                                <h3> Name : {user.firstName} {user.lastName}</h3>
+                                <h3> Account Type : {user.accountType} </h3>
+                            </div>
 
                         </div>
-                        <div className="col-4">
+                    </div>
 
-
-                            {
-                                !checkFollowingData &&
-                                <button className="btn btn-primary rounded-pill float-end" onClick={addFollowerHandler}>
-                                    Follow
-                                </button>
-                            }
-
-                            {
-                                checkFollowingData &&
-                                <button className="btn btn-primary rounded-pill float-end" onClick={unFollowHandler}>
-                                    Unfollow
-                                </button>
-                            }
-
-
-                        </div>
-
-
+                    <div className="col">
+                        <OtherFollowing/>
                     </div>
 
 
-                    <div className="m-3 text-secondary">
-                        <h3> Name : {user.firstName} {user.lastName}</h3>
-                        <h3> Account Type : {user.accountType} </h3>
-                    </div>
 
                 </div>
-            </div> : null
+            </> : null
 
     )
 
