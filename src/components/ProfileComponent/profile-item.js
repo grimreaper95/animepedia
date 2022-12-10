@@ -24,7 +24,7 @@ const ProfileItem = () => {
             <HeaderBar/>
             <div className="row mx-5">
                 <div className="row my-4">
-                    <div className="col-9 me-5">
+                    <div className="col-11 ">
                         <input
                             type="text"
                             className="form-control"
@@ -33,7 +33,7 @@ const ProfileItem = () => {
                             onInput={(e) => setInput(e.target.value)}
                         />
                     </div>
-                    <div className="col ms-5 float-end ps-4 pe-0 me-0">
+                    <div className="col float-end  pe-0 me-0">
                         <Link to={`/searchUsers/${input}`}>
                             <button className="btn btn-dark">
                                 Search
