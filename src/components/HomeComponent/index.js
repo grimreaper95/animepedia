@@ -11,10 +11,6 @@ const HomeScreen = () => {
 
     const {currentUser} = useSelector(state => state.userData)
 
-    useEffect(() => {
-        console.log(currentUser.accountType)
-
-    }, [])
     return (
         <>
             <HeaderBar/>
