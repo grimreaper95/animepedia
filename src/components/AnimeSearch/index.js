@@ -12,10 +12,10 @@ const AnimeSearch = () => {
     const dispatch = useDispatch()
     return (
         <>
-            <div className="row col-8">
-                <div className="col-10  me-3">
+            <div className="row">
+                <div className="col-10 me-5">
                     <input placeholder="Search any anime here!"
-                           className="form-control rounded-pill"
+                           className="form-control "
                            onChange={(e) => {
                                if (e.target.value === '') {
                                    dispatch(resetSearch());
@@ -26,9 +26,9 @@ const AnimeSearch = () => {
                            value={searchQuery}/>
                 </div>
 
-                <div className="col-1">
+                <div className="col-1 ms-5 float-end">
                     <button
-                            className="btn btn-primary float-end"
+                            className="btn btn-dark "
                             onClick={() => {
                                 dispatch(hideRandomAnime())
                                 dispatch(searchAnimeThunk(searchQuery))
