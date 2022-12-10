@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import {findUser} from "../../services/user-service";
 import {useState} from "react";
 import {useNavigate} from "react-router";
+import {Link} from "react-router-dom";
 
 
 const FollowItemList = ({follow}) => {
@@ -13,31 +14,25 @@ const FollowItemList = ({follow}) => {
         const getDataFromServer = async () => {
             const userData = await findUser(follow.followingId)
             setUserData(userData);
-
         }
-
         getDataFromServer();
-
     }, [])
     return (
 
         <>{
             user ?
-                <li
-                    className="list-group-item"
+                <div
+                    className="list-group-item fw-bold"
                 >
-                    <h1 onClick={() => {
-                        let path = `/profile/${user._id}`;
-                        navigate(path);
-                        // navigate("/profile/:user.id");
-                     }
-                    }>  {user.firstName} {user.lastName} </h1>
-                </li> : null
+                    <Link to={`/profile/${user._id}`}
+                          className="text-secondary link-primary">  {user.firstName} {user.lastName} </Link>
+                </div> : null
         }
 
 
         </>
     )
 }
+
 
 export default FollowItemList

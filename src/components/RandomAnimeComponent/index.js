@@ -21,7 +21,9 @@ const RandomAnimeList = () => {
     }, [])
 
     return (
-        <div>
+        <>
+
+            <div>
                 <Row class="mt-5 justify-content-center align-items-stretch">
                     {animeList.filter((anime, a) => a < 8).map((anime, a) => (
                         <Col key={a} xs={12} md={4} lg={3} sm={6}>
@@ -37,8 +39,9 @@ const RandomAnimeList = () => {
                         </Col>
                     ))}
                 </Row>
-           
-        </div>
+
+            </div>
+        </>
     )
 }
 export default RandomAnimeList;

@@ -7,6 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { findAllReviewsForAnime, removeReview, findAllReviewsByUser } from "../../services/anime-review-service.js";
 import { createReviewThunk } from "../../services/anime-review-thunk.js"
 import { Rating } from 'react-simple-star-rating'
+import {addLikedAnimeThunk} from "../../services/liked-anime-thunk";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {
+    faThumbsUp,
+} from '@fortawesome/free-solid-svg-icons';
+import {findUser} from "../../services/user-service";
+import {getLikesCount} from "../../services/liked-anime-service";
 
 const AnimeDetail = () => {
     const params = useParams();
@@ -20,6 +27,7 @@ const AnimeDetail = () => {
     const [reviewList, setReviewList] = useState([]);
     const [rating, setRating] = useState(0)
     const dispatch = useDispatch();
+    const [animeLike, setAnimeLike] = useState(0);
 
     const reviewClickHAndler = () => {
         const newReview = {
@@ -42,6 +50,19 @@ const AnimeDetail = () => {
     const onPointerLeave = () => console.log('Leave')
     const onPointerMove = (value, index) => console.log(value, index)
 
+    const likeAnimeHandler = () => {
+        if(!currentUser) {
+            alert('You need to login to perform this action!')
+            return ;
+        }
+        const userLikedAnime = {
+            userId: currentUser._id ,
+            animeId: animeInfo.mal_id,
+            animeImage: animeImage.image_url,
+            animeTitle: animeInfo.title
+        }
+        dispatch(addLikedAnimeThunk(userLikedAnime))
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -64,8 +85,17 @@ const AnimeDetail = () => {
             console.log(reviewData);
         }
 
+        const getTotalLikes = async () => {
+            console.log(animeInfo.mal_id)
+            const animeLikes = await getLikesCount(params.id)
+            // setUserData(userData);
+            console.log(animeLikes)
+            setAnimeLike(animeLikes)
+        }
+
         fetchData()
         getReviewList();
+        getTotalLikes();
 
     }, [])
 
@@ -91,7 +121,13 @@ const AnimeDetail = () => {
 
                 <Row className="mt-3 photo-section">
                     <Col class="col-3">
-                        <img height="320" src={animeImage.image_url} />
+                        <div className="anime-img">
+                            <img height="320" src={animeImage.image_url} />
+
+                        </div>
+                        <a className={`text-decoration-none ${animeLike > 0 ?'wd-reaction-tab-selected':''}`}>
+                            <FontAwesomeIcon icon={faThumbsUp} onClick={likeAnimeHandler} />
+                        </a>
                     </Col>
                     <Col className="video-responsive col-9">
                         <iframe
@@ -104,7 +140,7 @@ const AnimeDetail = () => {
                     </Col>
                 </Row>
 
-                <div class="card mt-3 shadow-lg p-3 bg-body rounded">
+                <div class="card mt-5 shadow-lg p-3 bg-body rounded">
                     <div class="card-body">
                         {animeGenre.map((genre, a) => (
                             <span class="card-link badge rounded-pill bg-dark card-title">{genre.name}</span>
