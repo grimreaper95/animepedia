@@ -17,8 +17,11 @@ const FollowingItem = () => {
 
     return (
         <>
-           <h1> People you are following </h1>
-            <ul className="list-group mt-2">
+            <div className="list-group">
+
+
+           <div className="list-group-item"><h2> People You Follow </h2></div>
+
 
                 {
                     followingList.map(item =>
@@ -27,7 +30,8 @@ const FollowingItem = () => {
                             follow={item}/>
                     )
                 }
-            </ul>
+
+            </div>
 
         </>
     )
