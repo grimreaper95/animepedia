@@ -1,11 +1,10 @@
 import React, {useEffect} from "react";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {loginThunk, registerThunk} from "../../services/user-thunk";
+import { registerThunk} from "../../services/user-thunk";
 import {Navigate, useNavigate} from "react-router";
 import {Link} from "react-router-dom";
 import "./index.css"
-import HeaderBar from "../Header";
 
 const Register = () => {
     const [username, setUsername] = useState('')

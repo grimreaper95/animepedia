@@ -6,7 +6,6 @@ import {randomAnimeThunk} from "../../services/random-anime-thunk";
 const RandomAnimeList = () => {
     const {animeList} = useSelector((state) => state.randomAnime)
     const dispatch = useDispatch()
-    // const [animeList, setAnimeList] = useState([]);
 
     useEffect(() => {
         dispatch(randomAnimeThunk())

@@ -4,8 +4,9 @@ const api = axios.create({withCredentials: true});
 const API_BASE = 'http://localhost:4000';
 
 export const findUser = async (userId) => {
-    const response = await api.get(`${API_BASE}/profile/${userId}`,userId);
-    console.log("data" + response.data)
+    console.log("user", userId)
+    const response = await api.get(`${API_BASE}/profile/${userId}`);
+    console.log("data" + response)
     return response.data;
 }
 

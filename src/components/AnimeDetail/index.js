@@ -7,13 +7,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { findAllReviewsForAnime, removeReview, findAllReviewsByUser } from "../../services/anime-review-service.js";
 import { createReviewThunk } from "../../services/anime-review-thunk.js"
 import { Rating } from 'react-simple-star-rating'
-import {addLikedAnimeThunk} from "../../services/liked-anime-thunk";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { addLikedAnimeThunk } from "../../services/liked-anime-thunk";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+
+
 import {
     faThumbsUp,
 } from '@fortawesome/free-solid-svg-icons';
-import {findUser} from "../../services/user-service";
-import {getLikesCount} from "../../services/liked-anime-service";
+import { findUser } from "../../services/user-service";
+import { getLikesCount } from "../../services/liked-anime-service";
 
 const AnimeDetail = () => {
     const params = useParams();
@@ -28,6 +31,8 @@ const AnimeDetail = () => {
     const [rating, setRating] = useState(0)
     const dispatch = useDispatch();
     const [animeLike, setAnimeLike] = useState(0);
+    const [reviewerList, setReviewer] = useState([])
+
 
     const reviewClickHAndler = () => {
         const newReview = {
@@ -41,9 +46,15 @@ const AnimeDetail = () => {
 
     // Catch Rating value
     const handleRating = (rate) => {
-        console.log('rate', rate);
         setRating(rate)
     }
+
+    const renderIcon = () => <FontAwesomeIcon
+        icon={faStar}
+        style={{ fontSize: 20, color: '#f1c40f' }}
+    />;
+
+    const renderIcons = num => [...Array(num)].map(renderIcon);
 
     // Optinal callback functions
     const onPointerEnter = () => console.log('Enter')
@@ -51,12 +62,12 @@ const AnimeDetail = () => {
     const onPointerMove = (value, index) => console.log(value, index)
 
     const likeAnimeHandler = () => {
-        if(!currentUser) {
+        if (!currentUser) {
             alert('You need to login to perform this action!')
-            return ;
+            return;
         }
         const userLikedAnime = {
-            userId: currentUser._id ,
+            userId: currentUser._id,
             animeId: animeInfo.mal_id,
             animeImage: animeImage.image_url,
             animeTitle: animeInfo.title
@@ -74,19 +85,25 @@ const AnimeDetail = () => {
             setAnimeTrailer(animeData.data.trailer)
             setAnimeGenre(animeData.data.genres)
             setAnimeStream(animeData.data.streaming)
-            console.log(animeData);
         }
 
         const getReviewList = async () => {
             const reviewListResponse = await findAllReviewsForAnime(params.id)
             console.log(reviewListResponse)
-            const reviewData = await reviewListResponse.data
+            const reviewData = reviewListResponse.data
+
+            let reviewerL = []
+            for (let r in reviewData) {
+                const reviewerResp = await findUser(reviewData[r].reviewBy)
+                reviewerL.push(reviewerResp)
+            }
+            console.log(reviewerL)
+            setReviewer(reviewerL)
             setReviewList(reviewData)
-            console.log(reviewData);
         }
 
+
         const getTotalLikes = async () => {
-            console.log(animeInfo.mal_id)
             const animeLikes = await getLikesCount(params.id)
             // setUserData(userData);
             console.log(animeLikes)
@@ -125,7 +142,7 @@ const AnimeDetail = () => {
                             <img height="320" src={animeImage.image_url} />
 
                         </div>
-                        <a className={`text-decoration-none ${animeLike > 0 ?'wd-reaction-tab-selected':''}`}>
+                        <a className={`text-decoration-none ${animeLike > 0 ? 'wd-reaction-tab-selected' : ''}`}>
                             <FontAwesomeIcon icon={faThumbsUp} onClick={likeAnimeHandler} />
                         </a>
                     </Col>
@@ -190,8 +207,20 @@ const AnimeDetail = () => {
                             <Col key={a} xs={12} md={4} lg={3} sm={6}>
                                 <Card className="shadow p-0 mb-5 bg-white rounded">
                                     <Card.Body>
-                                    <Card.Title>{review.reviewBy}</Card.Title>
-                                    <Card.Text>{review.review}</Card.Text>
+                                        <div className="row">
+                                            <div className="col-4">
+                                                <img className="rounded-circle" height={48} src={`/images/profile.png`} />
+                                            </div>
+                                            <div className="col-8">
+                                                <div className="fw-bold">{reviewerList[a].firstName} {reviewerList[a].lastName}</div>
+                                                <div>{reviewerList[a].username}</div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <Card.Text>{review.review}</Card.Text>
+                                        <div style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            {renderIcons(review.rating)}
+                                        </div>
                                     </Card.Body>
                                 </Card>
                             </Col>
