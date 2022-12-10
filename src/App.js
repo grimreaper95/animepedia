@@ -22,6 +22,8 @@ import AdminHomePage from "./components/AdminHome";
 import AdminLogin from "./components/AdminLogin";
 import adminReducer from "./reducers/admin-reducer";
 import reviewReducer from "./reducers/review-reducer";
+import LikedAnime from "./components/LikedAnime";
+import likedAnimeReducer from "./reducers/liked-anime-reducer";
 
 const store = configureStore({
     reducer: {
@@ -30,6 +32,7 @@ const store = configureStore({
         randomAnime: randomAnimeReducer,
         following: followingReducer,
         adminData: adminReducer,
+        likedAnime: likedAnimeReducer,
         review: reviewReducer
     },
 });
@@ -54,6 +57,7 @@ function App() {
                             <Route path="/searchUsers/:usid" element={<UserSearch/>}/>
                             <Route path="/admin" element={<AdminHomePage/>}/>
                             <Route path="/admin/login" element={<AdminLogin/>}/>
+                            <Route path="/likes/all" element={<LikedAnime/>}/>
                         </Routes>
                     </div>
                 </CurrentUser>

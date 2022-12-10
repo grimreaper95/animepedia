@@ -26,7 +26,8 @@ const Login = () => {
         const loginUser = {username, password}
         dispatch(loginThunk(loginUser)).then(
             () => {
-                console.log(currentUser)
+                // console.log("ABCD")
+                // console.log(currentUser)
                 if (currentUser) {
                     navigate('/')
                 }

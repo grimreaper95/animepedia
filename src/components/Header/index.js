@@ -5,13 +5,16 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {profileThunk, logoutThunk} from "../../services/user-thunk";
 import {useEffect} from "react";
+import {useNavigate} from "react-router";
 
 const HeaderBar = () => {
     const {currentUser} = useSelector(state => state.userData)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const handleLogout = () => {
         console.log('logging out');
         dispatch(logoutThunk())
+        navigate('../')
     }
     useEffect(()=>{
         dispatch(profileThunk())
@@ -39,7 +42,6 @@ const HeaderBar = () => {
                         <Nav.Link>Welcome {currentUser.username}</Nav.Link>
                         <Nav.Link onClick={handleLogout} className="nav-link" href="#">Logout</Nav.Link>
                         <Link to="/profile" className="nav-link" href="#">Profile</Link>
-
                     </>
                 }
                 {

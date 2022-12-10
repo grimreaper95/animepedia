@@ -14,11 +14,8 @@ const FollowItemList = ({follow}) => {
         const getDataFromServer = async () => {
             const userData = await findUser(follow.followingId)
             setUserData(userData);
-
         }
-
         getDataFromServer();
-
     }, [])
     return (
 

@@ -6,6 +6,7 @@ import {useNavigate} from "react-router";
 import Following from "../Following";
 import {Link} from "react-router-dom";
 import HeaderBar from "../Header";
+import LikedAnime from "../LikedAnime";
 
 const ProfileItem = () => {
 
@@ -80,7 +81,8 @@ const ProfileItem = () => {
                 </div>
 
             </div>
-
+            <h1>Animes liked by you: </h1>
+            <LikedAnime/>
 
         </>
     )
