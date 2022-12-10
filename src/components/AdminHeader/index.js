@@ -3,6 +3,7 @@ import {Container, Nav, Navbar} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {adminLogoutThunk, getAdminDetailsThunk} from "../../services/admin-thunk";
 import {useNavigate} from "react-router";
+import {Link} from "react-router-dom";
 
 const AdminHeader = () => {
 
@@ -40,16 +41,16 @@ const AdminHeader = () => {
                     <Nav >
                         {currentAdmin &&
                             <>
-                                Welcome {currentAdmin[0].username}
+                                <Nav.Link> Welcome {currentAdmin[0].username} </Nav.Link>
                                 <Nav.Link onClick={handleLogout} className="nav-link" href="#">Logout</Nav.Link>
 
                             </>}
 
                         {
                             !currentAdmin &&
-
                             <>
                                 Welcome
+
                             </>
                         }
 

@@ -74,31 +74,33 @@ const AdminHomePage = () => {
                         <ul>
                             {pendingList.map((item) => (
 
-                                <li className="m-2">
-                                    <div className="row">
-                                        <div className="col-8">
-                                            {item.username}
-                                        </div>
-                                        <div className="col-2">
+                                <div className="list-group m-2">
+                                    <div className="list-group-item ">
+                                        <div className="row">
+                                            <div className="col-8">
+                                                {item.username}
+                                            </div>
+                                            <div className="col-2">
 
-                                            <Button
-                                                onClick={() => handleApprove(item._id)}
-                                                className="btn btn-primary">
-                                                Approve
-                                            </Button>
-                                        </div>
+                                                <Button
+                                                    onClick={() => handleApprove(item._id)}
+                                                    className="btn btn-success">
+                                                    Approve
+                                                </Button>
+                                            </div>
 
-                                        <div className="col-2">
-                                            <Button
-                                                onClick={() => handleDecline(item._id)}
+                                            <div className="col-2">
+                                                <Button
+                                                    onClick={() => handleDecline(item._id)}
 
-                                                className="btn btn-danger">
-                                                Decline
-                                            </Button>
+                                                    className="btn btn-danger">
+                                                    Decline
+                                                </Button>
+                                            </div>
                                         </div>
                                     </div>
 
-                                </li>
+                                </div>
 
                             ))}
                         </ul>
@@ -114,18 +116,18 @@ const AdminHomePage = () => {
                     <>
 
                         <h1> Approved </h1>
-                        <ul>
+                        <div className="list-group">
                             {
                                 approved.map((item) => (
 
-                                        <li>
+                                        <div className="list-group-item">
                                             {item.username}
 
-                                        </li>
+                                        </div>
                                     )
                                 )
                             }
-                        </ul>
+                        </div>
                     </>
 
                     : null
