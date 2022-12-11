@@ -7,12 +7,14 @@ import Following from "../Following";
 import {Link} from "react-router-dom";
 import HeaderBar from "../Header";
 import LikedAnime from "../LikedAnime";
+import UserReview from "../UserReview";
 
 const ProfileItem = () => {
 
     const {currentUser} = useSelector(state => state.userData)
     const [editProfile, setEditProfile] = useState(false);
     const navigate = useNavigate();
+    const { currentReviewer, pendingList } = useSelector(state => state.reviewer);
     const [input, setInput] = useState();
     const editClickHandler = () => {
         setEditProfile(true);
@@ -66,16 +68,21 @@ const ProfileItem = () => {
                             </div>
                         </div>
                         <div className="m-3 text-secondary">
-                            <h3> Name : {currentUser.firstName} {currentUser.lastName}</h3>
-                            <h3> Email Id : {currentUser.email} </h3>
-                            <h3> Phone Number : {currentUser.phoneNumber} </h3>
-                            <h3> Account Type : {currentUser.accountType} </h3>
+                            <h4 className="title"> Name : {currentUser.firstName} {currentUser.lastName}</h4>
+                            <h4 className="title"> Email Id : {currentUser.email} </h4>
+                            <h4 className="title"> Phone Number : {currentUser.phoneNumber} </h4>
+                            <h4 className="title"> Account Type : {currentUser.accountType} </h4>
                         </div>
 
                     </div>
 
-                    <h1>Animes You Liked </h1>
+                    <p className="title">Animes You Liked </p>
                     <LikedAnime/>
+
+                    { !currentReviewer && <>
+                        <p className="title"> Reviews Posted </p>
+                        <UserReview/>
+                    </> }
 
                 </div>
                 <div className="col">

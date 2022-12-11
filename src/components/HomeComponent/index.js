@@ -28,7 +28,7 @@ const HomeScreen = () => {
                 {
                     currentUser ? <>
                         {currentUser.accountType === 'USER' ? <>
-                            <h1> Animes Liked </h1>
+                            <p className="title"> Animes Liked </p>
 
                             <LikedAnime/>
                         </> : null}
