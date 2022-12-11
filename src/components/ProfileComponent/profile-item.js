@@ -79,7 +79,7 @@ const ProfileItem = () => {
                     <p className="title">Animes You Liked </p>
                     <LikedAnime/>
 
-                    { !currentReviewer && <>
+                    { currentReviewer && <>
                         <p className="title"> Reviews Posted </p>
                         <UserReview/>
                     </> }
