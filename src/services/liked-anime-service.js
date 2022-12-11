@@ -20,8 +20,6 @@ export const getLikesCount = async (animeId) => {
 }
 
 export const getUserLikesAnime = async (useranime) => {
-    console.log('checking for: ' + useranime.userId +  ' ' + useranime.animeId);
     const response = await api.get(`${API_BASE}/userlikesanime/${useranime.userId}/${useranime.animeId}`, useranime);
-    console.log('user likes anime result ' + response.data);
     return response.data
 }

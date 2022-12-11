@@ -18,6 +18,11 @@ const Register = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {currentUser} = useSelector(state => state.userData)
+    const [userType, setUserType] = useState('USER')
+
+    const userTypeChange = (event) => {
+        setUserType(event.target.value);
+    }
 
     useEffect(() => {
         // redirect user to login page if registration was successful
@@ -32,11 +37,9 @@ const Register = () => {
         }
         setError(null)
         const newUser =
-            {username, firstName, lastName, email, phoneNumber, password, accountType: "USER"}
+            {username, firstName, lastName, email, phoneNumber, password, accountType: userType}
+        console.log(newUser)
         dispatch(registerThunk(newUser))
-
-        const loginUser = {username, password}
-
         console.log(currentUser)
         if (currentUser) {
             console.log(`Welcome ${currentUser.firstName}!`)
@@ -119,6 +122,16 @@ const Register = () => {
                             placeholder="Confirm Password"
                             onChange={(e) =>setConfirmPassword(e.target.value)}
                         />
+                    </div>
+                    <div >
+                        <br/>
+                        <span> Sign up as: </span>
+                        <input type="radio" onChange={(event) => userTypeChange(event)} className="form-check-input " name="userType" value="USER" defaultChecked></input>
+                        <label className="form-check-label ms-1 me-2" htmlFor="userRadio"> User </label>
+
+                        <input type="radio" onChange={(event) => userTypeChange(event)} className="form-check-input " name="userType" value="REVIEWER"></input>
+                        <label className="form-check-label ms-1" htmlFor="reviewerRadio"> Reviewer </label>
+
                     </div>
                     <div className="d-grid gap-2 mt-4">
                         <button

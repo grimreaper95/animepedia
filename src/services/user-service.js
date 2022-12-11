@@ -12,6 +12,17 @@ export const findUser = async (userId) => {
 
 export const register = async (user) => {
     const response = await api.post(`${API_BASE}/register`, user);
+    if (user.accountType == 'REVIEWER') {
+        const reviewer = {
+            username: user.username,
+            password: user.password,
+            email: user.email,
+            approved: false,
+            accountType: user.accountType
+        }
+        const registerAsReviewer = await api.post(`${API_BASE}/register-reviewer`, reviewer);
+        console.log('registered as reviewer');
+    }
     return response.data;
 }
 
@@ -47,11 +58,3 @@ export const findUserId = async (username) => {
     return response.data
 
 }
-// export const getLoggedInUserDetails = () => {
-//     try {
-//         const userDetails = localStorage.getItem("user");
-//         return JSON.parse(userDetails);
-//     } catch {
-//         return undefined;
-//     }
-// }
