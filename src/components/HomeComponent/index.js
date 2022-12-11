@@ -4,14 +4,21 @@ import {Container} from "react-bootstrap";
 import AnimeSearch from "../AnimeSearch";
 import React, {useEffect} from "react";
 import "./index.css"
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import LikedAnime from "../LikedAnime";
 import UserReview from "../UserReview/index.js"
+import { findReviewerThunk } from "../../services/reviewer-thunk.js";
 
 const HomeScreen = () => {
 
     const {currentUser} = useSelector(state => state.userData)
-
+    const { currentReviewer, pendingList } = useSelector(state => state.reviewer);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if (currentUser) {
+            dispatch(findReviewerThunk(currentUser._id))
+        }
+    }, [])
     return (
         <>
             <HeaderBar/>
@@ -27,10 +34,10 @@ const HomeScreen = () => {
                         </> : null}
 
                         <hr />
-                        {currentUser.accountType === 'REVIEWER' ? <>
+                        { !currentReviewer && <>
                             <p className="title"> Reviews Posted </p>
                             <UserReview/>
-                        </> : null}
+                        </> }
                     </> : null
                 }
             </Container>

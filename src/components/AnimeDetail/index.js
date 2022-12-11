@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addLikedAnimeThunk } from "../../services/liked-anime-thunk.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CreateReview from "../CreateReview/index.js";
+import { findReviewerThunk } from "../../services/reviewer-thunk.js";
 import ReviewList from "../AnimeReview/index.js";
 
 import {
@@ -18,6 +19,7 @@ const AnimeDetail = () => {
     const params = useParams();
 
     const { currentUser } = useSelector(state => state.userData);
+    const { currentReviewer, pendingList } = useSelector(state => state.reviewer);
     const [animeInfo, setAnimeDetail] = useState([]);
     const [animeImage, setAnimeImage] = useState([]);
     const [animeTrailer, setAnimeTrailer] = useState([]);
@@ -27,6 +29,14 @@ const AnimeDetail = () => {
     const dispatch = useDispatch();
     const [animeLikes, setAnimeLikes] = useState(0);
     const [userLikesAnime, setUserLikesAnime] = useState(false);
+    useEffect(() => {
+        console.log('hey')
+        if (currentUser) {
+            console.log('aaaaaaaa')
+            dispatch(findReviewerThunk(currentUser._id))
+            console.log('review it', currentReviewer)
+        }
+    }, [])
 
 
 
@@ -137,8 +147,8 @@ const AnimeDetail = () => {
 
                 <hr />
                 {
-                    !currentUser || currentUser.accountType == 'REVIEWER'?
-                    <CreateReview anime_id={params.id} anime_info={animeInfo} anime_image={animeImage}/>: null
+                    (!currentUser || !currentReviewer) &&
+                        <CreateReview anime_id={params.id} anime_info={animeInfo} anime_image={animeImage} />
                 }
                 <ReviewList anime_id={params.id} />
 

@@ -24,6 +24,7 @@ import adminReducer from "./reducers/admin-reducer";
 import reviewReducer from "./reducers/review-reducer";
 import LikedAnime from "./components/LikedAnime";
 import likedAnimeReducer from "./reducers/liked-anime-reducer";
+import reviewerReducer from "./reducers/reviewer-reducer";
 
 const store = configureStore({
     reducer: {
@@ -33,7 +34,8 @@ const store = configureStore({
         following: followingReducer,
         adminData: adminReducer,
         likedAnime: likedAnimeReducer,
-        review: reviewReducer
+        review: reviewReducer,
+        reviewer: reviewerReducer
     },
 });
 
