@@ -40,3 +40,9 @@
     font-size: 40px;
     color: white;
 }
+
+.title {
+    color: #860111;
+    font-size: larger;
+    font-weight: bold;
+}

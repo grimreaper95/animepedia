@@ -138,7 +138,7 @@ const AnimeDetail = () => {
                 <hr />
                 {
                     !currentUser || currentUser.accountType == 'REVIEWER'?
-                    <CreateReview anime_id={params.id} />: null
+                    <CreateReview anime_id={params.id} anime_info={animeInfo} anime_image={animeImage}/>: null
                 }
                 <ReviewList anime_id={params.id} />
 

@@ -9,14 +9,6 @@ const RandomAnimeList = () => {
 
     useEffect(() => {
         dispatch(randomAnimeThunk())
-        // const fetchData = async () => {
-        //     const response = await fetch(
-        //         `https://api.jikan.moe/v4/anime`)
-        //     const animeData = await response.json()
-        //     setAnimeList(animeData.data)
-        //     console.log(animeData);
-        // }
-        // fetchData()
     }, [])
 
     return (

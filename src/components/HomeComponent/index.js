@@ -6,6 +6,7 @@ import React, {useEffect} from "react";
 import "./index.css"
 import {useSelector} from "react-redux";
 import LikedAnime from "../LikedAnime";
+import UserReview from "../UserReview/index.js"
 
 const HomeScreen = () => {
 
@@ -25,15 +26,12 @@ const HomeScreen = () => {
                             <LikedAnime/>
                         </> : null}
 
+                        <hr />
                         {currentUser.accountType === 'REVIEWER' ? <>
-                            <h1> Reviews Posted </h1>
-
-
+                            <p className="title"> Reviews Posted </p>
+                            <UserReview/>
                         </> : null}
-
-
                     </> : null
-
                 }
             </Container>
         </>

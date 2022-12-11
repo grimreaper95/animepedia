@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Rating } from 'react-simple-star-rating'
 const CreateReview = (
     {
-        anime_id
+        anime_id,
+        anime_info,
+        anime_image
     }) => {
     let [reviewByUser, setReviewByUser] = useState('');
     const { currentUser } = useSelector(state => state.userData);
@@ -21,7 +23,9 @@ const CreateReview = (
             animeId: anime_id,
             reviewBy: currentUser,
             review: reviewByUser,
-            rating: rating
+            rating: rating,
+            animeImage: anime_image.image_url,
+            animeTitle: anime_info.title
         }
         dispatch(createReviewThunk(newReview));
     }
