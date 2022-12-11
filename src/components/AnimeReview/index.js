@@ -1,31 +1,36 @@
-import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { findAllReviewsForAnime, createReview, removeReview } from "../../services/anime-review-service.js";
-import { Card, Row, Col, Container } from "react-bootstrap";
+import ReviewItem
+    from "./review-item.js";
+import { findAllReviewsForAnimeThunk }
+    from "../../services/anime-review-thunk.js";
+import { useDispatch, useSelector } from "react-redux";
+import { Row, Col } from "react-bootstrap";
+import { findAllReviewsForAnime, removeReview, findAllReviewsByUser } from "../../services/anime-review-service.js";
 
-const AnimeReview = () => {
-    const params = useParams();
-    const [reviewList, setReviewList] = useState([]);
-    const dispatch = useDispatch()
-    
+
+const ReviewList = ({
+    anime_id
+}) => {
+    const dispatch = useDispatch();
+    const { reviewList } = useSelector(state => state.review);
     useEffect(() => {
-
-        const getReviewList = async () => {
-            const reviewListResponse = await findAllReviewsForAnime(params.id)
-            setReviewList(reviewListResponse)
-        }
-
-        getReviewList();
-        console.log(reviewList);
-
+        dispatch(findAllReviewsForAnimeThunk(anime_id))
+        console.log('review it', reviewList)
     }, [])
 
     return (
-        <>
-            hey
-        </>
-    )
-}
-
-export default AnimeReview
+        <><div>
+            {reviewList ?
+                <Row class="mt-5 justify-content-center align-items-stretch">
+                    {reviewList.map(item => (
+                        <Col xs={12} md={4} lg={3} sm={6}>
+                            <ReviewItem key={item._id} rev={item.review} user={item.reviewer} />
+                        </Col>
+                    ))}
+                </Row>
+                : null
+            }
+        </div></>
+    );
+};
+export default ReviewList;

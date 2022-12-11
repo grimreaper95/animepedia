@@ -4,24 +4,25 @@ import {findAllReviewsForAnimeThunk, findAllReviewsByUserThunk, createReviewThun
 const reviewSlice = createSlice({
     name: 'review',
     initialState: {
-        reviewList: [],
-        loading: false
+        reviewList: []
     },
     extraReducers: {
         [findAllReviewsForAnimeThunk.fulfilled]: (state, action) => {
             state.reviewList = action.payload;
+            console.log( state.reviewList )
         },
         [findAllReviewsByUserThunk.fulfilled]: (state, action) => {
             state.reviewList = action.payload;
         },
-        [createReviewThunk.fulfilled]: (state, {payload}) => {
-            state.reviewList.push(payload)
+        [createReviewThunk.fulfilled]: (state, action) => {
+            state.reviewList.push(action.payload)
+            console.log(action.payload)
         },
 
-        [removeReviewThunk.fulfilled]: (state, action) => {
-            // state.reviewList = state.reviewList
-            //     .filter(f => f.reviewId !== action.payload.reviewId && f.followingId !== action.payload.followingId)
-        }
+        // [removeReviewThunk.fulfilled]: (state, action) => {
+        //     // state.reviewList = state.reviewList
+        //     //     .filter(f => f.reviewId !== action.payload.reviewId && f.followingId !== action.payload.followingId)
+        // }
     }
 
 })

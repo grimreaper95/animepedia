@@ -3,7 +3,7 @@ import {findAllReviewsForAnime, findAllReviewsByUser, createReview, removeReview
 
 export const findAllReviewsForAnimeThunk = createAsyncThunk(
     'findAllReviewsForAnime',
-    async (animeId) => findAllReviewsForAnime(animeId)
+    async (animeId) => await findAllReviewsForAnime(animeId)
 )
 
 export const findAllReviewsByUserThunk = createAsyncThunk(

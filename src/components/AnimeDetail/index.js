@@ -4,62 +4,31 @@ import { useParams } from "react-router-dom";
 import "./index.css"
 import HeaderBar from "../Header";
 import { useDispatch, useSelector } from "react-redux";
-import { findAllReviewsForAnime, removeReview, findAllReviewsByUser } from "../../services/anime-review-service.js";
-import { createReviewThunk } from "../../services/anime-review-thunk.js"
-import { Rating } from 'react-simple-star-rating'
-import { addLikedAnimeThunk } from "../../services/liked-anime-thunk";
+import { addLikedAnimeThunk } from "../../services/liked-anime-thunk.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-
+import CreateReview from "../CreateReview/index.js";
+import ReviewList from "../AnimeReview/index.js";
 
 import {
     faThumbsUp,
 } from '@fortawesome/free-solid-svg-icons';
-import { findUser } from "../../services/user-service";
-import {getLikesCount, getUserLikesAnime} from "../../services/liked-anime-service";
+import { getLikesCount, getUserLikesAnime } from "../../services/liked-anime-service";
 
 const AnimeDetail = () => {
     const params = useParams();
-    let [reviewByUser, setReviewByUser] = useState('');
+
     const { currentUser } = useSelector(state => state.userData);
     const [animeInfo, setAnimeDetail] = useState([]);
     const [animeImage, setAnimeImage] = useState([]);
     const [animeTrailer, setAnimeTrailer] = useState([]);
     const [animeGenre, setAnimeGenre] = useState([]);
     const [animeStreaming, setAnimeStream] = useState([]);
-    const [reviewList, setReviewList] = useState([]);
-    const [rating, setRating] = useState(0)
+
     const dispatch = useDispatch();
     const [animeLikes, setAnimeLikes] = useState(0);
-    const [reviewerList, setReviewer] = useState([])
     const [userLikesAnime, setUserLikesAnime] = useState(false);
 
-    const reviewClickHAndler = () => {
-        const newReview = {
-            animeId: params.id,
-            reviewBy: currentUser,
-            review: reviewByUser,
-            rating: rating
-        }
-        dispatch(createReviewThunk(newReview));
-    }
 
-    // Catch Rating value
-    const handleRating = (rate) => {
-        setRating(rate)
-    }
-
-    const renderIcon = () => <FontAwesomeIcon
-        icon={faStar}
-        style={{ fontSize: 20, color: '#f1c40f' }}
-    />;
-
-    const renderIcons = num => [...Array(num)].map(renderIcon);
-
-    // Optinal callback functions
-    const onPointerEnter = () => console.log('Enter')
-    const onPointerLeave = () => console.log('Leave')
-    const onPointerMove = (value, index) => console.log(value, index)
 
     const likeAnimeHandler = async () => {
         if (!currentUser) {
@@ -92,22 +61,6 @@ const AnimeDetail = () => {
             setAnimeStream(animeData.data.streaming)
         }
 
-        const getReviewList = async () => {
-            const reviewListResponse = await findAllReviewsForAnime(params.id)
-            console.log(reviewListResponse)
-            const reviewData = reviewListResponse.data
-
-            let reviewerL = []
-            for (let r in reviewData) {
-                const reviewerResp = await findUser(reviewData[r].reviewBy)
-                reviewerL.push(reviewerResp)
-            }
-            console.log(reviewerL)
-            setReviewer(reviewerL)
-            setReviewList(reviewData)
-        }
-
-
         const getTotalLikes = async () => {
             const animeLikes = await getLikesCount(params.id)
             setAnimeLikes(animeLikes)
@@ -123,7 +76,6 @@ const AnimeDetail = () => {
         }
 
         fetchData()
-        getReviewList();
         getTotalLikes();
         checkIfUserLikesAnime();
     }, [])
@@ -149,12 +101,12 @@ const AnimeDetail = () => {
                 </Row>
 
                 <Row className="mt-3 photo-section">
-                    <Col class="col-3">
+                    <Col className="col-3">
                         <div className="anime-img">
                             <img height="320" src={animeImage.image_url} />
 
                         </div>
-                        <a className={`${userLikesAnime? 'like-selected':'like-unselected'}`}>
+                        <a className={`${userLikesAnime ? 'like-selected' : 'like-unselected'}`}>
                             <FontAwesomeIcon icon={faThumbsUp} onClick={likeAnimeHandler} />
                         </a>
                         { } {animeLikes} likes
@@ -170,77 +122,23 @@ const AnimeDetail = () => {
                     </Col>
                 </Row>
 
-                <div class="card mt-5 shadow-lg p-3 bg-body rounded">
-                    <div class="card-body">
+                <div className="card mt-5 shadow-lg p-3 bg-body rounded">
+                    <div className="card-body">
                         {animeGenre.map((genre, a) => (
-                            <span class="card-link badge rounded-pill bg-dark card-title">{genre.name}</span>
+                            <span className="card-link badge rounded-pill bg-dark card-title">{genre.name}</span>
                         ))}
-                        <p class="card-text">{animeInfo.synopsis}</p>
+                        <p className="card-text">{animeInfo.synopsis}</p>
                         {animeStreaming.map((stream, a) => (
-                            <a href={stream.url} class="card-link"><img width="30" height="30" src={"../../images/" + stream.name + ".png"} /></a>
+                            <a href={stream.url} className="card-link"><img width="30" height="30" src={"../../images/" + stream.name + ".png"} /></a>
 
                         ))}
                     </div>
                 </div>
 
                 <hr />
-                <h2 className="title">Reviews</h2>
-                <div class="card shadow-sm p-3 mb-5 bg-body rounded">
-                    <div class="card-body">
-                        <h5>Add a review</h5>
-                        <Rating
-                            onClick={handleRating}
-                            onPointerEnter={onPointerEnter}
-                            onPointerLeave={onPointerLeave}
-                            onPointerMove={onPointerMove}
-                        /* Available Props */
-                        />
+                <CreateReview anime_id={params.id}/>    
+                <ReviewList anime_id={params.id}/>
 
-                        <hr />
-
-                        <div>
-                            <textarea value={reviewByUser} placeholder="Share what you thought about the anime..."
-                                className="form-control border"
-                                onChange={(event) => setReviewByUser(event.target.value)}>
-                            </textarea>
-                        </div>
-                        <hr />
-                        <div className="float-end">
-                            <button className="rounded-pill btn btn-dark float-end mt-2 ps-3 pe-3 fw-bold"
-                                onClick={reviewClickHAndler}>
-                                Add
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <Row class="mt-5 justify-content-center align-items-stretch">
-                        {reviewList.filter((review, a) => a < 8).map((review, a) => (
-                            <Col key={a} xs={12} md={4} lg={3} sm={6}>
-                                <Card className="shadow p-0 mb-5 bg-white rounded">
-                                    <Card.Body>
-                                        <div className="row">
-                                            <div className="col-4">
-                                                <img className="rounded-circle" height={48} src={`/images/profile.jpg`} />
-                                            </div>
-                                            <div className="col-8">
-                                                <div className="fw-bold">{reviewerList[a].firstName} {reviewerList[a].lastName}</div>
-                                                <div>{reviewerList[a].username}</div>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <Card.Text>{review.review}</Card.Text>
-                                        <div style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                            {renderIcons(review.rating)}
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        ))}
-                    </Row>
-
-                </div>
             </Container>
         </>
     )
