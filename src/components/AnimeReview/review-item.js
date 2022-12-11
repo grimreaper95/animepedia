@@ -3,7 +3,8 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { removeReviewThunk } from "../../services/anime-review-thunk.js";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Link} from 'react-router-dom';
+import "../RandomAnimeComponent/index.css"
 const ReviewItem = (
     {
         rev,
@@ -32,7 +33,10 @@ const ReviewItem = (
                             </div>
                             {user &&
                                 <div className="col-8 mx-auto">
-                                    <div className="fw-bold">{user.firstName} {user.lastName}</div>
+                                    <a
+                                        href={'http://localhost:3000/profile/' + user._id}>
+                                        <div className="fw-bold">{user.firstName} {user.lastName}</div>
+                                    </a>
                                     <div>{user.username}</div>
                                 </div>
                             }
