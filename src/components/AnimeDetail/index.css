@@ -37,3 +37,8 @@
   .like-unselected {
       color: rgb(110, 118, 125);
   }
+
+  .star-text {
+    font-size: 1em;
+    font-weight: bold;
+  }

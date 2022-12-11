@@ -14,11 +14,13 @@ import {
     faThumbsUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { getLikesCount, getUserLikesAnime } from "../../services/liked-anime-service";
+import { findAllReviewsForAnimeThunk, findAverageRatingThunk } from "../../services/anime-review-thunk.js";
 
 const AnimeDetail = () => {
     const params = useParams();
 
     const { currentUser } = useSelector(state => state.userData);
+    const { reviewList, averageRating } = useSelector(state => state.review);
     const { currentReviewer, pendingList } = useSelector(state => state.reviewer);
     const [animeInfo, setAnimeDetail] = useState([]);
     const [animeImage, setAnimeImage] = useState([]);
@@ -33,6 +35,8 @@ const AnimeDetail = () => {
         if (currentUser) {
             dispatch(findApprovedReviewerThunk(currentUser.username))
         }
+        dispatch(findAllReviewsForAnimeThunk(params.id))
+        dispatch(findAverageRatingThunk(params.id))
     }, [])
 
 
@@ -82,7 +86,7 @@ const AnimeDetail = () => {
             setUserLikesAnime(userLikesAnime)
         }
 
-        fetchData()
+        fetchData();
         getTotalLikes();
         checkIfUserLikesAnime();
     }, [])
@@ -93,8 +97,8 @@ const AnimeDetail = () => {
         <>
             <HeaderBar />
             <Container>
-                <Row>
-                    <Col>
+                <div className="row">
+                    <div class="col-8">
                         <span className="title">
                             {animeInfo.title}
                         </span> <br />
@@ -104,19 +108,36 @@ const AnimeDetail = () => {
                         <span>
                             {animeInfo.type} . {animeInfo.duration} . Episodes {animeInfo.episodes}
                         </span>
-                    </Col>
-                </Row>
+                    </div>
 
+
+                    <div class="card-group col-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><a className={`${userLikesAnime ? 'like-selected' : 'like-unselected'}`}>
+                                    <span class="fa-solid fa-thumbs-up fa-2x" onClick={likeAnimeHandler}></span>
+                                </a>
+                                    <span className="star-text ms-2">{ } {animeLikes} likes</span></h5>
+
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><span class="fa fa-star fa-2x checked"></span>
+                                    <span className="star-text ms-2">{averageRating} / 5</span></h5>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <hr />
                 <Row className="mt-3 photo-section">
                     <Col className="col-3">
                         <div className="anime-img">
                             <img height="320" src={animeImage.image_url} />
 
                         </div>
-                        <a className={`${userLikesAnime ? 'like-selected' : 'like-unselected'}`}>
-                            <FontAwesomeIcon icon={faThumbsUp} onClick={likeAnimeHandler} />
-                        </a>
-                        { } {animeLikes} likes
+
                     </Col>
                     <Col className="video-responsive col-9">
                         <iframe
@@ -145,7 +166,7 @@ const AnimeDetail = () => {
                 <hr />
                 {
                     (!currentUser || currentReviewer) &&
-                        <CreateReview anime_id={params.id} anime_info={animeInfo} anime_image={animeImage} />
+                    <CreateReview anime_id={params.id} anime_info={animeInfo} anime_image={animeImage} />
                 }
                 <ReviewList anime_id={params.id} />
 

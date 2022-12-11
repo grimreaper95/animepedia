@@ -11,7 +11,7 @@ const ReviewList = ({
     anime_id
 }) => {
     const dispatch = useDispatch();
-    const { reviewList } = useSelector(state => state.review);
+    const { reviewList, averageRating } = useSelector(state => state.review);
     useEffect(() => {
         dispatch(findAllReviewsForAnimeThunk(anime_id))
         console.log('review it', reviewList)

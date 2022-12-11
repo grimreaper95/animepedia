@@ -4,7 +4,7 @@ const API_BASE = 'http://localhost:4000';
 
 export const findAllReviewsForAnime = async (animeId) => {
     const response = await axios.get(`${API_BASE}/review/anime/${animeId}`);
-    return response.data;;
+    return response.data;
 }
 
 export const findAllReviewsByUser = async (userId) => {
@@ -20,5 +20,10 @@ export const createReview = async (review) => {
 
 export const removeReview = async (reviewId) => {
     const response = await axios.delete(`${API_BASE}/remove-review/${reviewId}`)
+    return response.data;
+}
+
+export const findAverageRating = async (animeId) => {
+    const response = await axios.get(`${API_BASE}/review/avg-rating/${animeId}`);
     return response.data;
 }

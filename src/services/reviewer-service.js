@@ -20,16 +20,16 @@ export const deleteReviewer = async (rId) => {
 }
 
 export const findReviewer = async (rId) => {
-    const response = await api.get(`${API_BASE}/${rId}`)
+    const response = await api.get(`${API_BASE}/${rId}`);
     return response.data
 }
 
 export const findApprovedReviewer = async (username) => {
-    const response = await api.get(`${API_BASE}/user/${username}`)
+    const response = await api.get(`${API_BASE}/user/${username}`);
     return response.data
 }
 
 export const getApprovedReviewers = async () => {
-    const response = await api.get(`${API_BASE}/approved`)
+    const response = await api.get(`${API_BASE}/approved`);
     return response.data
 }
