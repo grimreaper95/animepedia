@@ -7,7 +7,7 @@ import "./index.css"
 import {useDispatch, useSelector} from "react-redux";
 import LikedAnime from "../LikedAnime";
 import UserReview from "../UserReview/index.js"
-import { findReviewerThunk } from "../../services/reviewer-thunk.js";
+import { findApprovedReviewerThunk } from "../../services/reviewer-thunk.js";
 
 const HomeScreen = () => {
 
@@ -16,7 +16,9 @@ const HomeScreen = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         if (currentUser) {
-            dispatch(findReviewerThunk(currentUser._id))
+            
+            dispatch(findApprovedReviewerThunk(currentUser.username))
+            console.log(currentReviewer)
         }
     }, [])
     return (
@@ -34,7 +36,7 @@ const HomeScreen = () => {
                         </> : null}
 
                         <hr />
-                        { !currentReviewer && <>
+                        { currentReviewer && <>
                             <p className="title"> Reviews Posted </p>
                             <UserReview/>
                         </> }

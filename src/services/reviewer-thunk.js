@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {deleteReviewer, getPendingReviewers, updateReviewer, findReviewer} from "./reviewer-service";
+import {deleteReviewer, getPendingReviewers, updateReviewer, findReviewer, findApprovedReviewer} from "./reviewer-service";
 
 export const getPendingReviewerThunk = createAsyncThunk(
     'getPendingReviewer',
@@ -19,4 +19,9 @@ export const deleteReviewerThunk = createAsyncThunk(
 export const findReviewerThunk = createAsyncThunk (
     'findReviewer',
     async (rId) => await findReviewer(rId)
+)
+
+export const findApprovedReviewerThunk = createAsyncThunk (
+    'findReviewer',
+    async (username) => await findApprovedReviewer(username)
 )

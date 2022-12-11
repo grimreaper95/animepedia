@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addLikedAnimeThunk } from "../../services/liked-anime-thunk.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CreateReview from "../CreateReview/index.js";
-import { findReviewerThunk } from "../../services/reviewer-thunk.js";
+import { findApprovedReviewerThunk } from "../../services/reviewer-thunk.js";
 import ReviewList from "../AnimeReview/index.js";
 
 import {
@@ -30,11 +30,8 @@ const AnimeDetail = () => {
     const [animeLikes, setAnimeLikes] = useState(0);
     const [userLikesAnime, setUserLikesAnime] = useState(false);
     useEffect(() => {
-        console.log('hey')
         if (currentUser) {
-            console.log('aaaaaaaa')
-            dispatch(findReviewerThunk(currentUser._id))
-            console.log('review it', currentReviewer)
+            dispatch(findApprovedReviewerThunk(currentUser.username))
         }
     }, [])
 
@@ -147,7 +144,7 @@ const AnimeDetail = () => {
 
                 <hr />
                 {
-                    (!currentUser || !currentReviewer) &&
+                    (!currentUser || currentReviewer) &&
                         <CreateReview anime_id={params.id} anime_info={animeInfo} anime_image={animeImage} />
                 }
                 <ReviewList anime_id={params.id} />

@@ -24,6 +24,11 @@ export const findReviewer = async (rId) => {
     return response.data
 }
 
+export const findApprovedReviewer = async (username) => {
+    const response = await api.get(`${API_BASE}/user/${username}`)
+    return response.data
+}
+
 export const getApprovedReviewers = async () => {
     const response = await api.get(`${API_BASE}/approved`)
     return response.data
