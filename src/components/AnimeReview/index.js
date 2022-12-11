@@ -5,7 +5,6 @@ import { findAllReviewsForAnimeThunk }
     from "../../services/anime-review-thunk.js";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
-import { findAllReviewsForAnime, removeReview, findAllReviewsByUser } from "../../services/anime-review-service.js";
 
 
 const ReviewList = ({
@@ -24,7 +23,7 @@ const ReviewList = ({
                 <Row class="mt-5 justify-content-center align-items-stretch">
                     {reviewList.map(item => (
                         <Col xs={12} md={4} lg={3} sm={6}>
-                            <ReviewItem key={item._id} rev={item.review} user={item.reviewer} />
+                            <ReviewItem key={item._id} rev={item} user={item.reviewer} />
                         </Col>
                     ))}
                 </Row>

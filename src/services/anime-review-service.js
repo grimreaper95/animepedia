@@ -22,5 +22,6 @@ export const createReview = async (review) => {
 
 export const removeReview = async (reviewId) => {
     const response = await axios.delete(`${API_BASE}/remove-review/${reviewId}`)
+    console.log(response)
     return response.data;
 }

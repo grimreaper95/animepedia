@@ -19,10 +19,11 @@ const reviewSlice = createSlice({
             console.log(action.payload)
         },
 
-        // [removeReviewThunk.fulfilled]: (state, action) => {
-        //     // state.reviewList = state.reviewList
-        //     //     .filter(f => f.reviewId !== action.payload.reviewId && f.followingId !== action.payload.followingId)
-        // }
+        [removeReviewThunk.fulfilled]: (state, { payload }) => {
+            console.log(state.reviewList)
+            state.reviewList = state.reviewList
+                .filter(f => f._id !== payload)
+        }
     }
 
 })

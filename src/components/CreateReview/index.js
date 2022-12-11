@@ -19,7 +19,6 @@ const CreateReview = (
             review: reviewByUser,
             rating: rating
         }
-        console.log(newReview)
         dispatch(createReviewThunk(newReview));
     }
 

@@ -1,5 +1,5 @@
-import {createAsyncThunk} from "@reduxjs/toolkit";
-import {findAllReviewsForAnime, findAllReviewsByUser, createReview, removeReview} from "./anime-review-service.js";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { findAllReviewsForAnime, findAllReviewsByUser, createReview, removeReview } from "./anime-review-service.js";
 
 export const findAllReviewsForAnimeThunk = createAsyncThunk(
     'findAllReviewsForAnime',
@@ -11,12 +11,15 @@ export const findAllReviewsByUserThunk = createAsyncThunk(
     async (userId) => await findAllReviewsByUser(userId)
 )
 
-export const createReviewThunk = createAsyncThunk (
+export const createReviewThunk = createAsyncThunk(
     'createReview',
-        async (review) => await createReview(review)
+    async (review) => await createReview(review)
 )
 
-export const removeReviewThunk = createAsyncThunk (
+export const removeReviewThunk = createAsyncThunk(
     'removeReview',
-        async (reviewId) => await removeReview(reviewId)
+    async (reviewId) => {
+        await removeReview(reviewId)
+        return reviewId
+    }
 )
