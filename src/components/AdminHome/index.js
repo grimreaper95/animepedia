@@ -130,7 +130,8 @@ const AdminHomePage = () => {
                         <div className="list-group m-2">
                             {
                                 approved.map((item) => (
-                                        <div className="list-group m-2">
+                                        <div role= "button"
+                                            className="list-group m-2">
                                             <div
                                                 onClick={async () => {
                                                     await getUserId(item.username)
