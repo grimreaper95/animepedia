@@ -8,17 +8,19 @@ import {
     updateReviewer
 } from "../../services/reviewer-service";
 import {Button} from "react-bootstrap";
+import {findUserId} from "../../services/user-service";
+import {useNavigate} from "react-router";
 
 const AdminHomePage = () => {
 
     const [pendingList, setPendingList] = useState([]);
     const [approved, setApproved] = useState([])
+    const [userId, setUserId] = useState(null)
 
+    const navigate = useNavigate();
     const handleApprove = async (rId) => {
         const details = await findReviewer(rId);
-        // const details = reviewerDetails;
-        console.log("rrr" + details._id)
-        //
+
         if (details !== undefined) {
             const updated = {...details, approved: true}
             console.log("u " + updated._id)
@@ -44,6 +46,15 @@ const AdminHomePage = () => {
         setPendingList(updatedPendingList)
     }
 
+    const getUserId = async (rId) => {
+
+        const userData = await findUserId(rId)
+        console.log("data" + userData._id)
+        setUserId(userData._id)
+        let path = `/profile/${userData._id}`
+        console.log("path " + path)
+        navigate(path)
+    }
 
     useEffect(() => {
 
@@ -69,7 +80,7 @@ const AdminHomePage = () => {
             <AdminHeader/>
             {
                 pendingList ?
-                    <div className= "container">
+                    <div className="container">
                         <h1> Reviewers Pending to Approve</h1>
                         <ul>
                             {pendingList.map((item) => (
@@ -119,12 +130,19 @@ const AdminHomePage = () => {
                         <div className="list-group m-2">
                             {
                                 approved.map((item) => (
-                                    <div className="list-group m-2">
-                                        <div className="list-group-item">
-                                            @ {item.username}
+                                        <div role= "button"
+                                            className="list-group m-2">
+                                            <div
+                                                onClick={async () => {
+                                                    await getUserId(item.username)
+                                                    console.log("userId " + userId)
 
+                                                }}
+                                                className="list-group-item">
+                                                @ {item.username}
+
+                                            </div>
                                         </div>
-                                    </div>
                                     )
                                 )
                             }

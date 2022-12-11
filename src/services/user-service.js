@@ -41,6 +41,12 @@ export const searchByUsername = async (username) => {
     return response.data;
 }
 
+
+export const findUserId = async (username) => {
+    const response = await api.get(`${API_BASE}/user/reviewer/${username}`)
+    return response.data
+
+}
 // export const getLoggedInUserDetails = () => {
 //     try {
 //         const userDetails = localStorage.getItem("user");
