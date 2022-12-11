@@ -16,71 +16,34 @@ const Login = () => {
     const {currentUser} = useSelector(state => state.userData)
 
     useEffect(() => {
-        // redirect user to login page if registration was successful
-        if (currentUser) navigate('/')
-        console.log(currentUser)
+        // redirect user to home page if login was successful
+        if (currentUser) {
+            navigate('/')
+        }
     }, [navigate, currentUser])
 
-    const handleLoginBtn = () => {
+    const handleLoginBtn = async () => {
         setError(null)
         const loginUser = {username, password}
-        dispatch(loginThunk(loginUser)).then(
-            () => {
-                // console.log("ABCD")
-                // console.log(currentUser)
-                if (currentUser) {
-                    navigate('/')
-                }
-            }
-
-        )
+        const loginRes = await dispatch(loginThunk(loginUser));
+        if (loginRes.error) {
+            setError('Invalid username or password!')
+        }
     }
 
-    const goToProfile = () => {
-
-    }
-    // return (
-    //     <>
-    //         <h1>Login</h1>
-    //
-    //         {
-    //             error &&
-    //             <div className="alert alert-danger">
-    //                 {error}
-    //             </div>
-    //         }
-    //         <input
-    //             className="form-control mb-2"
-    //             value={username}
-    //             placeholder="Username"
-    //             onChange={(e) =>setUsername (e.target.value)}/>
-    //
-    //         <input
-    //             className="form-control mb-2"
-    //             value={password}
-    //             type="password"
-    //             placeholder="Password"
-    //             onChange={(e) =>setPassword(e.target.value)}/>
-    //
-    //         <button onClick={handleLoginBtn} className="btn btn-primary w-100">
-    //             Login
-    //         </button>
-    //
-    //
-    //     </>
-    // )
     return (
         <>
             <HeaderBar/>
             <div className="Auth-form-container">
             <div className="Auth-form">
-                {
-                    error &&
-                    <div className="alert alert-danger">
-                        {error}
-                    </div>
-                }
+
                 <div className="Auth-form-content">
+                    {
+                        error &&
+                        <div className="alert alert-danger">
+                            {error}
+                        </div>
+                    }
                     <h3 className="Auth-form-title">Sign In</h3>
                     <div className="form-group mt-3">
                         <label>Username</label>

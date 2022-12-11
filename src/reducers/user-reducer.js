@@ -42,7 +42,7 @@ const userSlice = createSlice({
         [loginThunk.rejected]: (state, action) => {
             state.error = action.payload;
             state.currentUser = null;
-            alert('Invalid username or password.  Try again!');
+            // alert('Invalid username or password.  Try again!');
         },
         [profileThunk.rejected]: (state, action) => {
             state.error = action.payload;

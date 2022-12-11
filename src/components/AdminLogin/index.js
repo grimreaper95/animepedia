@@ -2,11 +2,13 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {adminLoginThunk, loginThunk} from "../../services/admin-thunk";
 import {useNavigate} from "react-router";
+import HeaderBar from "../Header";
 
 const AdminLogin = () => {
 
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
+    const [error, setError] = useState(null)
     const dispatch = useDispatch();
     const {currentAdmin} = useSelector(state => state.adminData);
     const navigate = useNavigate()
@@ -18,28 +20,29 @@ const AdminLogin = () => {
     },[currentAdmin,navigate])
 
 
-    const handleLoginBtn = () => {
+    const handleLoginBtn = async () => {
+        setError(null)
         const adminData = {username, password}
         console.log(adminData)
-        dispatch(adminLoginThunk(adminData)).then(
-            () => {
-                console.log(currentAdmin)
-                if(currentAdmin){
-                    navigate("/admin")
-                }
-            }
-        )
-
-
-
+        const adminLoginRes = await dispatch(adminLoginThunk(adminData));
+        if (adminLoginRes.error) {
+            setError('Invalid username or password!')
+        }
     }
 
 
     return(
         <>
+            <HeaderBar/>
             <div className="Auth-form-container">
                 <div className="Auth-form">
                     <div className="Auth-form-content">
+                        {
+                            error &&
+                            <div className="alert alert-danger">
+                                {error}
+                            </div>
+                        }
                         <h3 className="Auth-form-title">Admin Login</h3>
                         <div className="form-group mt-3">
                             <label>Username</label>

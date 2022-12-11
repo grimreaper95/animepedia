@@ -10,9 +10,12 @@ import {
 import {Button} from "react-bootstrap";
 import {findUserId} from "../../services/user-service";
 import {useNavigate} from "react-router";
+import Header from "../Header";
+import HeaderBar from "../Header";
+import {useSelector} from "react-redux";
 
 const AdminHomePage = () => {
-
+    const {currentUser} = useSelector(state => state.userData)
     const [pendingList, setPendingList] = useState([]);
     const [approved, setApproved] = useState([])
     const [userId, setUserId] = useState(null)
@@ -77,8 +80,13 @@ const AdminHomePage = () => {
 
     return (
         <>
-            <AdminHeader/>
+            <HeaderBar/>
             {
+                !currentUser &&
+                <h1 className="ps-5 ms-5">Login as Admin to view this page.</h1>
+            }
+            {
+                currentUser &&
                 pendingList ?
                     <div className="container">
                         <h1> Reviewers Pending to Approve</h1>
@@ -123,6 +131,7 @@ const AdminHomePage = () => {
             }
 
             {
+                currentUser &&
                 approved ?
                     <div className="container">
 

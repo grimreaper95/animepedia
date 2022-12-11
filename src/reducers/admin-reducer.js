@@ -24,7 +24,6 @@ const adminSlice = createSlice({
             },
             [adminLoginThunk.rejected]: (state, action) => {
                 state.currentUser = null;
-                alert('Invalid username or password.  Try again!');
             },
             [getAdminDetailsThunk.fulfilled]: (state, action) => {
                 state.currentAdmin = action.payload
