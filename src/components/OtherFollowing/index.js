@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {useParams} from "react-router-dom";
 import OtherFollowingItem from "./OtherFollowingItem";
+import {findAllFollowers} from "../../services/following-service";
 
 const OtherFollowing = () => {
 
@@ -11,11 +12,20 @@ const OtherFollowing = () => {
 
     const dispatch = useDispatch();
 
-    const {followingList, loading} = useSelector(state => state.following)
+    // const {followingList, loading} = useSelector(state => state.following)
+
+    const[followList, setFollowList] = useState([]);
 
     useEffect(() => {
-        dispatch(findAllFollowersThunk(param.usid))
-    } , []);
+        const getFollowingList = async () => {
+            const followData = await findAllFollowers(param.usid)
+            setFollowList(followData)
+
+        }
+
+        getFollowingList()
+        // dispatch(findAllFollowersThunk(param.usid))
+    }, []);
 
     return (
         <>
@@ -26,7 +36,7 @@ const OtherFollowing = () => {
 
 
                 {
-                    followingList.map(item =>
+                    followList.map(item =>
                         <OtherFollowingItem
                             key={item._id}
                             follow={item}/>
@@ -39,6 +49,6 @@ const OtherFollowing = () => {
     )
 
 
-}
+};
 
 export default OtherFollowing;

@@ -56,7 +56,10 @@ const OtherUserProfile = () => {
         const followingId = user._id;
         const follow = {userId, followingId}
         dispatch(addFollowerThunk(follow));
+        setFollowingData(true)
         alert("User Followed")
+
+
 
     }
 
@@ -65,6 +68,7 @@ const OtherUserProfile = () => {
         const followingId = user._id;
         const unfollowId = {userId, followingId}
         dispatch(unfollowThunk(unfollowId));
+        setFollowingData(false)
         alert("User Unfollowed")
     }
 
