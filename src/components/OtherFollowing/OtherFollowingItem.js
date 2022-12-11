@@ -22,11 +22,9 @@ const OtherFollowingItem = ({follow}) => {
         <>{
             user ?
                 <div
-                    className="list-group-item fw-bold"
+                    className="list-group-item fw-bold text-secondary"
                 >
-                    <Link to={`/profile/${user._id}`}
-                          className="text-secondary link-primary"
-                    >  {user.firstName} {user.lastName} </Link>
+                    {user.firstName} {user.lastName}
                 </div>
                 : null
 
