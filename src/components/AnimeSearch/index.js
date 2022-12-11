@@ -12,8 +12,8 @@ const AnimeSearch = () => {
     const dispatch = useDispatch()
     return (
         <>
-            <div className="row">
-                <div className="col-10 me-5">
+            <div className="row mx-auto">
+                <div className="col-11">
                     <input placeholder="Search any anime here!"
                            className="form-control "
                            onChange={(e) => {
@@ -26,7 +26,7 @@ const AnimeSearch = () => {
                            value={searchQuery}/>
                 </div>
 
-                <div className="col-1 ms-5 float-end">
+                <div className="col-1 float-end">
                     <button
                             className="btn btn-dark "
                             onClick={() => {
