@@ -1,8 +1,9 @@
 import { Card, Row, Col, Container } from "react-bootstrap";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useDispatch } from "react-redux";
 import { removeReviewThunk } from "../../services/anime-review-thunk.js";
+import { useDispatch, useSelector } from "react-redux";
+
 const ReviewItem = (
     {
         rev,
@@ -13,7 +14,7 @@ const ReviewItem = (
     const deleteReviewHandler = (id) => {
         dispatch(removeReviewThunk(id));
     }
-
+    const { currentUser } = useSelector(state => state.userData);
     const renderIcon = () => <FontAwesomeIcon
         icon={faStar}
         style={{ fontSize: 20, color: '#f1c40f' }}
@@ -34,8 +35,12 @@ const ReviewItem = (
                                 <div>{user.username}</div>
                             </div>
                         }
-                        <i class="fa-solid fa-x col-1 float-end p-0"
-                        onClick={() => deleteReviewHandler(rev._id)}></i>
+                        {
+                            currentUser._id === user._id &&
+                            <i class="fa-solid fa-x col-1 float-end p-0"
+                            onClick={() => deleteReviewHandler(rev._id)}></i>
+                        }
+
                     </div>
                     <hr />
                     <Card.Text>{rev.review}</Card.Text>
