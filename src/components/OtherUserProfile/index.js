@@ -8,11 +8,14 @@ import {unfollow} from "../../services/following-service";
 import HeaderBar from "../Header";
 import Following from "../Following";
 import OtherFollowing from "../OtherFollowing";
+import LikedAnime from "../LikedAnime";
+import UserReview from "../UserReview";
 
 const OtherUserProfile = () => {
     const params = useParams();
     const otherUser = params.usid;
     const [user, setUserData] = useState(null);
+    const { currentReviewer, pendingList } = useSelector(state => state.reviewer);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {currentUser} = useSelector(state => state.userData)
@@ -124,11 +127,12 @@ const OtherUserProfile = () => {
 
 
                             <div className="m-3 text-secondary">
-                                <h3> Name : {user.firstName} {user.lastName}</h3>
-                                <h3> Account Type : {user.accountType} </h3>
+                                <h4 className="title"> Name : {user.firstName} {user.lastName}</h4>
+                                <h4 className="title"> Account Type : {user.accountType} </h4>
                             </div>
 
                         </div>
+
                     </div>
 
                     <div className="col">
