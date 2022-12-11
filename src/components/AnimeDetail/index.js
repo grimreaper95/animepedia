@@ -136,8 +136,11 @@ const AnimeDetail = () => {
                 </div>
 
                 <hr />
-                <CreateReview anime_id={params.id}/>    
-                <ReviewList anime_id={params.id}/>
+                {
+                    !currentUser || currentUser.accountType == 'REVIEWER'?
+                    <CreateReview anime_id={params.id} />: null
+                }
+                <ReviewList anime_id={params.id} />
 
             </Container>
         </>

@@ -19,7 +19,7 @@ const ReviewList = ({
 
     return (
         <><div>
-            {reviewList ?
+            {reviewList &&
                 <Row class="mt-5 justify-content-center align-items-stretch">
                     {reviewList.map(item => (
                         <Col xs={12} md={4} lg={3} sm={6}>
@@ -27,7 +27,6 @@ const ReviewList = ({
                         </Col>
                     ))}
                 </Row>
-                : null
             }
         </div></>
     );

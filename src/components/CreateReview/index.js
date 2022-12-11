@@ -13,6 +13,10 @@ const CreateReview = (
     const [rating, setRating] = useState(0)
     const dispatch = useDispatch();
     const reviewClickHAndler = () => {
+        if (!currentUser) {
+            alert('You need to login to perform this action!')
+            return;
+        }
         const newReview = {
             animeId: anime_id,
             reviewBy: currentUser,

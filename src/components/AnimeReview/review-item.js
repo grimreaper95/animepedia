@@ -23,32 +23,34 @@ const ReviewItem = (
     const renderIcons = num => [...Array(num)].map(renderIcon);
     return (
         <>
-            <Card className="shadow p-0 mb-5 bg-white rounded">
-                <Card.Body>
-                    <div className="row">
-                        <div className="col-3">
-                            <img className="rounded-circle" height={48} src={`/images/profile.jpg`} />
-                        </div>
-                        {user &&
-                            <div className="col-8 mx-auto">
-                                <div className="fw-bold">{user.firstName} {user.lastName}</div>
-                                <div>{user.username}</div>
+            {rev &&
+                <Card className="shadow p-0 mb-5 bg-white rounded">
+                    <Card.Body>
+                        <div className="row">
+                            <div className="col-3">
+                                <img className="rounded-circle" height={48} src={`/images/profile.jpg`} />
                             </div>
-                        }
-                        {
-                            currentUser._id === user._id &&
-                            <i class="fa-solid fa-x col-1 float-end p-0"
-                            onClick={() => deleteReviewHandler(rev._id)}></i>
-                        }
+                            {user &&
+                                <div className="col-8 mx-auto">
+                                    <div className="fw-bold">{user.firstName} {user.lastName}</div>
+                                    <div>{user.username}</div>
+                                </div>
+                            }
+                            {
+                                user && currentUser._id === user._id ?
+                                    <i class="fa-solid fa-x col-1 float-end p-0"
+                                        onClick={() => deleteReviewHandler(rev._id)}></i> : null
+                            }
 
-                    </div>
-                    <hr />
-                    <Card.Text>{rev.review}</Card.Text>
-                    <div style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        {renderIcons(rev.rating)}
-                    </div>
-                </Card.Body>
-            </Card>
+                        </div>
+                        <hr />
+                        <Card.Text>{rev.review}</Card.Text>
+                        <div style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            {renderIcons(rev.rating)}
+                        </div>
+                    </Card.Body>
+                </Card>
+            }
         </>
     );
 }
