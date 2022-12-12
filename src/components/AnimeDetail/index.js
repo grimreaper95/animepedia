@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import "./index.css"
 import HeaderBar from "../Header";
 import { useDispatch, useSelector } from "react-redux";
-import { addLikedAnimeThunk } from "../../services/liked-anime-thunk.js";
+import {addLikedAnimeThunk, removeLikedAnimeThunk} from "../../services/liked-anime-thunk.js";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CreateReview from "../CreateReview/index.js";
 import { findApprovedReviewerThunk } from "../../services/reviewer-thunk.js";
 import ReviewList from "../AnimeReview/index.js";
@@ -41,14 +42,17 @@ const AnimeDetail = () => {
             alert('You need to login to perform this action!')
             return;
         }
-        if (userLikesAnime) {
-            return;
-        }
         const userLikedAnime = {
             userId: currentUser._id,
             animeId: animeInfo.mal_id,
             animeImage: animeImage.image_url,
             animeTitle: animeInfo.title
+        }
+        if (userLikesAnime) {
+            dispatch(removeLikedAnimeThunk(userLikedAnime))
+            setAnimeLikes(animeLikes - 1)
+            setUserLikesAnime(false)
+            return;
         }
         dispatch(addLikedAnimeThunk(userLikedAnime))
         setAnimeLikes(animeLikes + 1)

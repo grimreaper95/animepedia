@@ -14,6 +14,14 @@ export const addLikedAnime = async (userLikedAnime) => {
     return response.data
 }
 
+export const removeLikedAnime = async (userDislikedAnime) => {
+    console.log(userDislikedAnime)
+    const response = await api.post(`${API_BASE}/dislike`, userDislikedAnime);
+    return response.data
+}
+
+
+
 export const getLikesCount = async (animeId) => {
     const response = await api.get(`${API_BASE}/likescount/${animeId}`, animeId);
     return response.data.length

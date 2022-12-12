@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {profileThunk, logoutThunk} from "../../services/user-thunk";
 import {useEffect} from "react";
 import {useNavigate} from "react-router";
+import {adminLogoutThunk} from "../../services/admin-thunk";
 
 const HeaderBar = () => {
     const {currentUser} = useSelector(state => state.userData)
@@ -15,6 +16,9 @@ const HeaderBar = () => {
     const handleLogout = () => {
         console.log('logging out');
         dispatch(logoutThunk())
+        if (currentAdmin) {
+            dispatch(adminLogoutThunk())
+        }
         navigate('../')
     }
     useEffect(() => {
