@@ -86,7 +86,7 @@ const EditProfile = (editProfile) => {
 
                 </div>
 
-                <div className=" mt-2">
+                <div className=" mt-2 mb-5">
                     <div className="form-floating">
                         <input
                             onChange={(event) => {

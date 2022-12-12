@@ -8,8 +8,6 @@ import {unfollow} from "../../services/following-service";
 import HeaderBar from "../Header";
 import Following from "../Following";
 import OtherFollowing from "../OtherFollowing";
-import LikedAnime from "../LikedAnime";
-import UserReview from "../UserReview";
 
 const OtherUserProfile = () => {
     const params = useParams();
@@ -60,7 +58,6 @@ const OtherUserProfile = () => {
         const follow = {userId, followingId}
         dispatch(addFollowerThunk(follow));
         setFollowingData(true)
-        alert("User Followed")
 
 
 
@@ -72,7 +69,6 @@ const OtherUserProfile = () => {
         const unfollowId = {userId, followingId}
         dispatch(unfollowThunk(unfollowId));
         setFollowingData(false)
-        alert("User Unfollowed")
     }
 
 
