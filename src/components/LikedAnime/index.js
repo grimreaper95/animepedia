@@ -21,7 +21,7 @@ const LikedAnime = () => {
                         <Card className="shadow p-0 mb-5 bg-white rounded">
                             <Card.Img src={anime.animeImage} />
                             <Card.Body>
-                                <Link to={'/detail/' + anime.mal_id}  className="stretched-link" >
+                                <Link to={`/detail/${anime.animeId}`}  className="stretched-link" >
                                     <Card.Title>{anime.animeTitle}</Card.Title>
                                 </Link>
                             </Card.Body>
