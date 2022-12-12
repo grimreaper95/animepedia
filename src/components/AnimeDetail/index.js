@@ -5,14 +5,9 @@ import "./index.css"
 import HeaderBar from "../Header";
 import { useDispatch, useSelector } from "react-redux";
 import { addLikedAnimeThunk } from "../../services/liked-anime-thunk.js";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CreateReview from "../CreateReview/index.js";
 import { findApprovedReviewerThunk } from "../../services/reviewer-thunk.js";
 import ReviewList from "../AnimeReview/index.js";
-
-import {
-    faThumbsUp,
-} from '@fortawesome/free-solid-svg-icons';
 import { getLikesCount, getUserLikesAnime } from "../../services/liked-anime-service";
 import { findAllReviewsForAnimeThunk, findAverageRatingThunk } from "../../services/anime-review-thunk.js";
 
