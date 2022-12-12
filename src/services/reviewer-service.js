@@ -1,8 +1,9 @@
 import axios from 'axios';
+import APP_URL from "../constants";
 
 const api = axios.create({withCredentials: true});
 
-const API_BASE = 'http://localhost:4000/reviewer';
+const API_BASE = APP_URL.node_server + '/reviewer';
 
 export const getPendingReviewers = async () => {
     const response = await api.get(`${API_BASE}/pending`)

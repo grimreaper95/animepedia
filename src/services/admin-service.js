@@ -1,8 +1,9 @@
 import axios from "axios";
+import APP_URL from "../constants";
 
 const api = axios.create({withCredentials: true});
 
-const API_BASE = 'http://localhost:4000';
+const API_BASE = APP_URL.node_server;
 
 export const adminLogin = async (admin) => {
     const response = await api.post(`${API_BASE}/admin/login`, admin);

@@ -1,6 +1,7 @@
 import axios from "axios";
+import APP_URL from "../constants";
 
-const API_BASE = 'http://localhost:4000';
+const API_BASE = APP_URL.node_server;
 
 export const findAllReviewsForAnime = async (animeId) => {
     const response = await axios.get(`${API_BASE}/review/anime/${animeId}`);
