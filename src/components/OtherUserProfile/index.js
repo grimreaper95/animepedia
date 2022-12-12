@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {findUser} from "../../services/user-service";
 import {useDispatch, useSelector} from "react-redux";
 import {addFollowerThunk, findAllFollowersThunk, unfollowThunk} from "../../services/following-thunk";
@@ -8,6 +8,13 @@ import {unfollow} from "../../services/following-service";
 import HeaderBar from "../Header";
 import Following from "../Following";
 import OtherFollowing from "../OtherFollowing";
+<<<<<<< Updated upstream
+=======
+import LikedAnime from "../LikedAnime";
+import UserReview from "../UserReview";
+import {Card, Col, Row} from "react-bootstrap";
+import {findOtherAllLikedAnimeThunk} from "../../services/liked-anime-thunk";
+>>>>>>> Stashed changes
 
 const OtherUserProfile = () => {
     const params = useParams();
@@ -19,13 +26,14 @@ const OtherUserProfile = () => {
     const {currentUser} = useSelector(state => state.userData)
     const {followingList, loading} = useSelector(state => state.following)
     const [checkFollowingData, setFollowingData] = useState(false);
+    const {otherLikedAnimeList} = useSelector((state) => state.likedAnime)
 
     useEffect(() => {
         const getDataFromServer = async () => {
             const userData = await findUser(otherUser)
             setUserData(userData);
         };
-
+        dispatch(findOtherAllLikedAnimeThunk(otherUser))
         getDataFromServer();
 
     }, [])
@@ -128,6 +136,25 @@ const OtherUserProfile = () => {
                             </div>
 
                         </div>
+
+                        <p className="title mt-5 pt-5"> Anime They Liked </p>
+                        <div>
+                            <Row class="mt-5 justify-content-center align-items-stretch">
+                                {otherLikedAnimeList?.map((anime) => (
+                                    <Col key={anime.animeId} xs={12} md={4} lg={3} sm={6}>
+                                        <Card className="shadow p-0 mb-5 bg-white rounded">
+                                            <Card.Img src={anime.animeImage} />
+                                            <Card.Body>
+                                                <Link to={'/detail/' + anime.mal_id}  className="stretched-link" >
+                                                    <Card.Title>{anime.animeTitle}</Card.Title>
+                                                </Link>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                ))}
+                            </Row>
+                        </div>
+
 
                     </div>
 

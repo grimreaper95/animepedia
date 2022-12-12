@@ -1,11 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {findAllLikedAnimeThunk} from "../services/liked-anime-thunk";
+import {findAllLikedAnimeThunk, findOtherAllLikedAnimeThunk} from "../services/liked-anime-thunk";
 
 
 const likedAnimeSlice = createSlice({
     name: 'likedAnime',
     initialState : {
         likedAnimeList: [],
+        otherLikedAnimeList: [],
         loading: false
     },
     reducers: {
@@ -22,6 +23,15 @@ const likedAnimeSlice = createSlice({
             state.likedAnimeList = action.payload
             state.loading = false
             console.log(state.likedAnimeList)
+        },
+        [findOtherAllLikedAnimeThunk.pending]: (state, action) => {
+            state.loading = true
+            state.otherLikedAnimeList = []
+        },
+        [findOtherAllLikedAnimeThunk.fulfilled]: (state, action) => {
+            state.otherLikedAnimeList = action.payload
+            state.loading = false
+            console.log(state.otherLikedAnimeList)
         }
     }
 })

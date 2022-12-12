@@ -9,6 +9,11 @@ export const findAllLikedAnime = async (userId) => {
     return response.data
 }
 
+export const findOtherAllLikedAnime = async (userId) => {
+    const response = await api.get(`${API_BASE}/like/${userId}`, userId);
+    return response.data
+}
+
 export const addLikedAnime = async (userLikedAnime) => {
     console.log(userLikedAnime)
     const response = await api.post(`${API_BASE}/like`, userLikedAnime);
