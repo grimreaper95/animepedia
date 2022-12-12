@@ -3,6 +3,7 @@ import React, { useEffect} from 'react'
 import "./index.css"
 import {useDispatch, useSelector} from "react-redux";
 import {findAllLikedAnimeThunk} from "../../services/liked-anime-thunk";
+import APP_URL from "../../constants";
 
 const LikedAnime = () => {
     const {currentUser} = useSelector((state) => state.userData)
@@ -19,7 +20,7 @@ const LikedAnime = () => {
                         <Card className="shadow p-0 mb-5 bg-white rounded">
                             <Card.Img src={anime.animeImage} />
                             <Card.Body>
-                                <a href={'http://localhost:3000/detail/' + anime.animeId}>
+                                <a href={APP_URL.react + '/detail/' + anime.mal_id}>
                                     <Card.Title>{anime.animeTitle}</Card.Title>
                                 </a>
                             </Card.Body>

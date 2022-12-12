@@ -2,6 +2,7 @@ import { Card, Row, Col, Container } from "react-bootstrap";
 import React from 'react';
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import APP_URL from "../../constants";
 const ReviewItem = (
     {
         rev
@@ -21,7 +22,7 @@ const ReviewItem = (
                     <Card.Img src={rev.animeImage} />
                     <Card.Body>
 
-                        <a href={'http://localhost:3000/detail/' + rev.animeId} >
+                        <a href={APP_URL.react + '/detail/' + rev.animeId} >
                             <Card.Title>{rev.animeTitle}</Card.Title>
                         </a>
                         <hr />

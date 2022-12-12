@@ -52,8 +52,8 @@ function App() {
                             <Route path="/login" element={<Login/>}/>
                             <Route path="/register" element={<Register/>}/>
                             <Route path="/profile" element={<ProfileItem/>}/>
-                            <Route path="detail/:id" element={<AnimeDetailScreen/>}/>
-                            <Route path="edit-profile" element={<EditProfile/>}/>
+                            <Route path="/detail/:id" element={<AnimeDetailScreen/>}/>
+                            <Route path="/edit-profile" element={<EditProfile/>}/>
                             <Route path="/profile/:usid" element={<OtherUserProfile/>}/>
                             <Route path="/follow/:usid" element={<Following/>}/>
                             <Route path="/searchUsers/:usid" element={<UserSearch/>}/>
