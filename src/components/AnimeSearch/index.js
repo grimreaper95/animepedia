@@ -6,6 +6,7 @@ import {resetSearch} from "../../reducers/anime-search-reducer";
 import {hideRandomAnime} from "../../reducers/random-anime-reducer";
 import {randomAnimeThunk} from "../../services/random-anime-thunk";
 import APP_URL from "../../constants";
+import {Link} from "react-router-dom";
 
 const AnimeSearch = () => {
     const [searchQuery, setSearchQuery] = useState('')
@@ -48,9 +49,9 @@ const AnimeSearch = () => {
                                     <Card.Img src={anime.images.jpg.image_url} />
                                     <Card.Body>
 
-                                        <a href={APP_URL.react + '/detail/' + anime.mal_id}>
+                                        <Link to={'/detail/' + anime.mal_id}  className="stretched-link" >
                                             <Card.Title>{anime.title}</Card.Title>
-                                        </a>
+                                        </Link>
                                         <Card.Text>{anime.synopsis?.substring(0, 100)} {anime.synopsis?.length >= 200 && '...'}</Card.Text>
                                     </Card.Body>
                                 </Card>

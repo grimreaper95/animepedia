@@ -3,6 +3,7 @@ import React from 'react';
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import APP_URL from "../../constants";
+import {Link} from "react-router-dom";
 const ReviewItem = (
     {
         rev
@@ -22,9 +23,9 @@ const ReviewItem = (
                     <Card.Img src={rev.animeImage} />
                     <Card.Body>
 
-                        <a href={APP_URL.react + '/detail/' + rev.animeId} >
+                        <Link to={'/detail/' + rev.animeId}>
                             <Card.Title>{rev.animeTitle}</Card.Title>
-                        </a>
+                        </Link>
                         <hr />
                         <Card.Text>{rev.review}</Card.Text>
                         <div style={{ flexDirection: 'row', alignItems: 'center' }}>
