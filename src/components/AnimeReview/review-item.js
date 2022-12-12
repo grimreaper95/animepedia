@@ -31,14 +31,14 @@ const ReviewItem = (
                             <div className="col-3">
                                 <img className="rounded-circle" height={48} src={`/images/profile.jpg`} />
                             </div>
-                            {user &&
+                            {user ?
                                 <div className="col-8 mx-auto">
                                     <a
                                         href={'http://localhost:3000/profile/' + user._id}>
                                         <div className="fw-bold">{user.firstName} {user.lastName}</div>
                                     </a>
                                     <div>{user.username}</div>
-                                </div>
+                                </div>:null
                             }
                             {
                                 user && currentUser._id === user._id ?
