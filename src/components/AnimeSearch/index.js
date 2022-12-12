@@ -5,6 +5,7 @@ import { Card, Row, Col, Container } from "react-bootstrap";
 import {resetSearch} from "../../reducers/anime-search-reducer";
 import {hideRandomAnime} from "../../reducers/random-anime-reducer";
 import {randomAnimeThunk} from "../../services/random-anime-thunk";
+import APP_URL from "../../constants";
 
 const AnimeSearch = () => {
     const [searchQuery, setSearchQuery] = useState('')
@@ -46,7 +47,8 @@ const AnimeSearch = () => {
                                 <Card className="shadow p-0 mb-5 bg-white rounded">
                                     <Card.Img src={anime.images.jpg.image_url} />
                                     <Card.Body>
-                                        <a href={'http://localhost:3000/detail/' + anime.mal_id}>
+
+                                        <a href={APP_URL.react + '/detail/' + anime.mal_id}>
                                             <Card.Title>{anime.title}</Card.Title>
                                         </a>
                                         <Card.Text>{anime.synopsis?.substring(0, 100)} {anime.synopsis?.length >= 200 && '...'}</Card.Text>

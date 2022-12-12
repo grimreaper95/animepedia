@@ -5,6 +5,7 @@ import { removeReviewThunk } from "../../services/anime-review-thunk.js";
 import { useDispatch, useSelector } from "react-redux";
 import { Link} from 'react-router-dom';
 import "../RandomAnimeComponent/index.css"
+import APP_URL from "../../constants";
 const ReviewItem = (
     {
         rev,
@@ -34,7 +35,7 @@ const ReviewItem = (
                             {user &&
                                 <div className="col-8 mx-auto">
                                     <a
-                                        href={'http://localhost:3000/profile/' + user._id}>
+                                        href={APP_URL.react + '/profile/' + user._id}>
                                         <div className="fw-bold">{user.firstName} {user.lastName}</div>
                                     </a>
                                     <div>{user.username}</div>
