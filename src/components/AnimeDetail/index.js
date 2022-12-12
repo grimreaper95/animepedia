@@ -77,6 +77,9 @@ const AnimeDetail = () => {
         }
 
         const checkIfUserLikesAnime = async () => {
+            if(!currentUser) {
+                return;
+            }
             const userLikesAnime = await getUserLikesAnime(
                 {
                     userId: currentUser._id,

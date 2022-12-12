@@ -42,7 +42,7 @@ const ReviewItem = (
                                 </div>:null
                             }
                             {
-                                user && currentUser._id === user._id ?
+                                user && currentUser && currentUser._id === user._id ?
                                     <i class="fa-solid fa-x col-1 float-end p-0"
                                         onClick={() => deleteReviewHandler(rev._id)}></i> : null
                             }
