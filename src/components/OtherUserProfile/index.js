@@ -8,13 +8,10 @@ import {unfollow} from "../../services/following-service";
 import HeaderBar from "../Header";
 import Following from "../Following";
 import OtherFollowing from "../OtherFollowing";
-<<<<<<< Updated upstream
-=======
 import LikedAnime from "../LikedAnime";
 import UserReview from "../UserReview";
 import {Card, Col, Row} from "react-bootstrap";
 import {findOtherAllLikedAnimeThunk} from "../../services/liked-anime-thunk";
->>>>>>> Stashed changes
 
 const OtherUserProfile = () => {
     const params = useParams();
