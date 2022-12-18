@@ -71,7 +71,7 @@ const Login = () => {
                         </button>
                     </div>
                     <p className="forgot-password text-right mt-2">
-                        New User? <a href="../register">Sign Up</a>
+                        New User? <Link to="/register">Sign Up</Link>
                     </p>
                 </div>
             </div>
